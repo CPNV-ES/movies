@@ -1,0 +1,73 @@
+/*! 
+ * LF
+ * Start Bootstrap - 2 Col Portfolio HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+footer {
+    margin: 50px 0;
+}
+
+headblue{
+	background-color: #069dc3;
+	height: 50px;
+	width: 100px;
+	}
+	
+header{
+	background-color: #069dc3;
+}
+
+.logo{
+	width: 25%;
+	height: auto;
+	}
+	
+.welcome{
+	margin-top: 2%;
+	font-size: 15px;
+	}
+	
+.btn {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 20px;
+  background: #494848;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+  margin-top: 2%;
+}
+
+.btn:hover {
+  text-decoration: none;
+  color: #E8E8E8;
+}
+.collapse navbar-collapse{
+	text-align: center !important;
+}
+.menu {
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  color: #ffffff;
+  background: #277386 !important;
+  text-align: center !important;
+}
+.menu:hover {
+  background: #069dc3 !important;
+}
+.menu:active {
+  background: #069dc3 !important;
+}
+.col-md-3 portfolio-item{
+	background-color: #d8d8d8 !important;
+	}

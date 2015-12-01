@@ -92,7 +92,7 @@ function getFilms (&$return, $paths = NULL){
 		foreach($result as $row)
 		{
 			if(!getInfoOfFilm($row[RESULT_NAME], $title, $file_type)){
-				$error = "Name is invalide" .$row[RESULT_NAME];
+				$error = "Name is invalide" . $row[RESULT_NAME];
 				continue;
 			}
 			if(($file_type_id = getTypeId($db, $file_type)) === false){
