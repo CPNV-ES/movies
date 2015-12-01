@@ -25,20 +25,20 @@
 
 <body>
     <!-- Page Header -->
-    
+
     <div class="header">
 
         <div class="page-header">
             <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo du site -->
-            
+
             <p class="welcome">WELCOME !</p>
-        	<p>You want to see the movies that you have in your datas ?</br> 
+        	<p>You want to see the movies that you have in your datas ?</br>
 			Then, click right bellow and you will see them</p>
-            
+
 			<a class="btn" href>Display movies</a> <!-- bouton "Display movies" -->
         </div>
     </div>
-        
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -77,40 +77,43 @@
 			//$id_films = $_POST['id_films']; // Récupération de la données data{}
 			//1 - connexion au serveur de BD
 			$link = mysqli_connect("localhost", "root", "", "cinema_aida") or die("Problème de connexion...");
-			
+
 			if (!mysqli_set_charset($link, "utf8")){
 				printf("Erreur lors du chargement du jeu de caractères utf8 : %s\n",
 				mysqli_error($link));
-			}    
-					
+			}
+
 			//2 - envoi de la requête
-			$sql = "SELECT DISTINCT film_nom, film_annee, film_genre, film_duree, film_img FROM films INNER JOIN cinema ON cinema.id_cinema=cinema.id_cinema ORDER BY film_annee DESC LIMIT 4";
+			$sql = "SELECT DISTINCT film_nom, film_annee, film_genre, film_duree, film_img, film_synopsis FROM films INNER JOIN cinema ON cinema.id_cinema=cinema.id_cinema ORDER BY film_annee DESC LIMIT 4";
 			$result = mysqli_query($link, $sql);
-       
+
         ?>
-        
+
         <!-- Projects Row -->
-        
+
         <div class="row">
             <!-- boucle pour afficher les films et description -->
-            <?php			
-				while ($row=mysqli_fetch_array($result)){				
+            <?php
+				while ($row=mysqli_fetch_array($result)){
             ?>
-            
+
             <div class="col-md-6 portfolio-item">
                 <div class="thumbnail">
-                	<h3>
-						<?php 
-                            echo''.htmlspecialchars($row['film_nom']).''; 
+                	<h4>
+						<?php
+                            echo''.htmlspecialchars($row['film_nom']).'';
                         ?>
-                    </h3>
+                    </h4>
                    <p>
-                   		<?php 
-                            echo''.htmlspecialchars($row['film_descr']).''; 
+                   		<?php
+                            echo''.htmlspecialchars($row['film_synopsis']).'';
                         ?>
-                   </p> 
+                   </p>
                 </div>
             </div>
+            <?php
+				}
+            ?>
         </div>
         <!-- /.row -->
 
@@ -152,7 +155,7 @@
                 <div class="col-lg-12">
 
                 </div>
-                
+
             </div>
             <!-- /.row -->
         </footer>

@@ -7,11 +7,11 @@ function connect()
 	$user = "root";
 	$mdp = "";
 
-	try 
+	try
 	{
 		$pdo = new PDO('mysql:host='.$host.';dbname='.$bdd, $user, $mdp);
-	} 
-	catch (Exception $e) 
+	}
+	catch (Exception $e)
 	{
 		exit('Erreur : ' . $e->getMessage());
 	}
@@ -41,11 +41,11 @@ function  update_files($id_movie)
 function insertion_Genre($Genre)
 {
 	$pdo = Connect();
-	foreach ($Genre as $val) 
+	foreach ($Genre as $val)
 	{
 
 		$sql_search = "SELECT `genres` FROM 'name' WHERE `genres`.'name'=".$val;
-		
+
 	}
 }
 
@@ -73,7 +73,7 @@ function SearchMovie($title)
 	$movie = $tmdb->searchMovie($title);
 
 	$i=0;
-	foreach ($movie as $e) 
+	foreach ($movie as $e)
 	{
 		//echo $e->getTitle() ."<br>";
 		//echo $e->getID() ."<br>";
@@ -82,7 +82,7 @@ function SearchMovie($title)
 		//echo "<hr>";
 		$i++;
 	}
-	if (!empty($tabid[0])) 
+	if (!empty($tabid[0]))
 	{
 		$FullMovie = $tmdb->getMovie($tabid[0]);
 		//echo $FullMovie->getTitle()." <br>";
@@ -92,20 +92,20 @@ function SearchMovie($title)
 		return(get_object_vars(json_decode($FullInfo)));
 	}
 	return false;
-	
+
 }
 
 
 
 function AllParse($Info)
 {
-	
+
 	//var_dump($Info);
 	//print_r($Info);
 	$NbCase = count($Info["genres"]);
 
-	for ($i=0; $i < $NbCase; $i++) 
-	{ 
+	for ($i=0; $i < $NbCase; $i++)
+	{
 		$Genres[$i] = ($Info["genres"][$i]);
 		$Genres[$i] = get_object_vars($Genres[$i]);
 		$Genres[$i] = $Genres[$i]["name"];
@@ -142,13 +142,13 @@ function AllParse($Info)
 
 	//print_r($cast["cast"]);
 	$NbCastCast = count($cast["cast"]);
-	for($i=0; $i < $NbCastCast; $i++) 
+	for($i=0; $i < $NbCastCast; $i++)
 	{
 		$Casts[$i] = get_object_vars($cast["cast"][$i]);
 		$Casts[$i] = $Casts[$i]["name"];
 	}
 	//print_r($Casts);
-	if (isset($Casts)) 
+	if (isset($Casts))
 	{
 		$TabInfo["Actors"] = $Casts;
 	}
