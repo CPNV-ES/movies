@@ -1,4 +1,5 @@
 <?php
+ 
 define('PATHS', serialize(array('Z:/CPNV/Exemple/Video_jzaehrin', 'Z:/CPNV/Exemple/Video_Marco')));//Chemin static
 define('VERBOSE', false); //Activation de la verbosit� #DEBUG
 

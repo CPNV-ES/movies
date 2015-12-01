@@ -1,4 +1,5 @@
 <?php 
+ 
 function connect()
 {
 	$bdd = "movies";
