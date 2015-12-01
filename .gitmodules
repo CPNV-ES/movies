@@ -1,0 +1,3 @@
+[submodule "tmdb"]
+	path = tmdb
+	url = https://github.com/pixelead0/tmdb_v3-PHP-API-.git
