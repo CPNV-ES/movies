@@ -1,18 +1,18 @@
 <?php
 define('PATHS', serialize(array('Z:/CPNV/Exemple/Video_jzaehrin', 'Z:/CPNV/Exemple/Video_Marco')));//Chemin static
-define('VERBOSE', false); //Activation de la verbosité #DEBUG
+define('VERBOSE', false); //Activation de la verbositï¿½ #DEBUG
 
 
 /* Function getDir
 	Permet de recuperer le pointeur sur le dossier voulu
 	Param :
-		- link : Conteneur du pointeur du fichier (Rempli à l'execution)
-		- path : Chaine de caractère contenant le chemin vers le dossier
-	Return : En succes = True, Echéc = False	*/
+		- link : Conteneur du pointeur du fichier (Rempli ï¿½ l'execution)
+		- path : Chaine de caractï¿½re contenant le chemin vers le dossier
+	Return : En succes = True, Echï¿½c = False	*/
 function getDir(&$link, $path){
 	if($link !== null)
 		return true;
-	
+
 	$link = opendir($path);
 	if($link === false){
 		$link == NULL;
@@ -59,7 +59,7 @@ function getFilms(&$films)
 		listFile($result, $name, $path);
 		foreach ($name as $row) {
 			$matches = array();
-			preg_match('/^(\[.*\])?[_\.\s]?(([a-zA-Z0-9éèàë]{1,})([_\.\s]([A-Z]?([a-zéèàë]{1,}|[I]{1,})?|(?!(19|20|21)[0-9]{2})[0-9]{1,}|\%\![0-9]{1,}))*)([_\.\s]((\(?([0-9]){4}\)?|[A-Z]{4,}|(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})[\s-]*(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})?).*))?\.(avi|mp4|mov|mpg|mpa|wma)$/', $row, $matches);
+			preg_match('/^(\[.*\])?[_\.\s]?(([a-zA-Z0-9ï¿½ï¿½ï¿½ï¿½]{1,})([_\.\s]([A-Z]?([a-zï¿½ï¿½ï¿½ï¿½]{1,}|[I]{1,})?|(?!(19|20|21)[0-9]{2})[0-9]{1,}|\%\![0-9]{1,}))*)([_\.\s]((\(?([0-9]){4}\)?|[A-Z]{4,}|(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})[\s-]*(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})?).*))?\.(avi|mp4|mov|mpg|mpa|wma)$/', $row, $matches);
 			if(isset($matches[2])) {
 				$tmp = preg_replace('/[_\.]/', ' ', $matches[2]);
 				$tmp = strtolower($tmp);
@@ -81,7 +81,7 @@ function getFilmsByPaths(&$films, $paths)
 		listFile($result, $name, $path);
 		foreach ($name as $row) {
 			$matches = array();
-			preg_match('/^(\[.*\])?[_\.\s]?(([a-zA-Z0-9éèàë]{1,})([_\.\s]([A-Z]?([a-zéèàë]{1,}|[I]{1,})?|(?!(19|20|21)[0-9]{2})[0-9]{1,}|\%\![0-9]{1,}))*)([_\.\s]((\(?([0-9]){4}\)?|[A-Z]{4,}|(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})[\s-]*(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})?).*))?\.(avi|mp4|mov|mpg|mpa|wma)$/', $row, $matches);
+			preg_match('/^(\[.*\])?[_\.\s]?(([a-zA-Z0-9Ã©Ã¨Ã Ã´&]{1,})([_\.\s]([A-Z]?([a-zÃ©Ã¨Ã Ã´&]{1,}|[I]{1,})?|(?!(19|20|21)[0-9]{2})[0-9]{1,}|\%\![0-9]{1,}))*)([_\.\s]((\(?([0-9]){4}\)?|[A-Z]{4,}|(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})[\s-]*(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})?).*))?\.(avi|mp4|mov|mpg|mpa|wma)$/', $row, $matches);
 			if (isset($matches[2])) {
 				$tmp = preg_replace('/[_\.]/', ' ', $matches[2]);
 				$tmp = strtolower($tmp);
