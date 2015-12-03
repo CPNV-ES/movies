@@ -10,6 +10,7 @@ function getSourceId($db, $path){
     if(!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+		//echo $error;
         return false;
     }
 
@@ -29,11 +30,13 @@ function insertSource($db, $path){
     if(!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+		//echo $error;
         return false;
     }
 
     if($req->rowCount() == 1){
         $result = $db->lastInsertId();
+		//echo $error;
         return $result;
     }
     return false;
@@ -49,6 +52,7 @@ function getTypeId($db, $file_type){
     if(!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+		//echo $error;
         return false;
     }
 
@@ -79,6 +83,7 @@ function getFile($db, $source_id, $path, $file_name, $file_type_id){
     if(!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+		//echo $error;
         return false;
     }
 
@@ -100,6 +105,7 @@ function insertFile($db, $source_id, $path, $file_name, $file_type_id){
     if(!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+		//echo $error;
         return false;
     }
 
@@ -109,6 +115,7 @@ function insertFile($db, $source_id, $path, $file_name, $file_type_id){
     }
     else{
         $error = "Aucune insertion n'a été faite lors de la requête d'insertion du chemin !!";
+		//echo $error;
         return false;
     }
 
@@ -123,7 +130,7 @@ function insertFile($db, $source_id, $path, $file_name, $file_type_id){
     if(!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
-        echo $error;
+        //echo $error;
         return false;
     }
 
@@ -133,9 +140,9 @@ function insertFile($db, $source_id, $path, $file_name, $file_type_id){
     }
     else{
         $error = "Aucune insertion n'a été faite lors de la requête d'insertion du fichier !!";
+		//echo $error;
         return false;
     }
 
-    return$file_id;
+    return $file_id;
 }
-?>
