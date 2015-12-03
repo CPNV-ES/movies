@@ -1,11 +1,13 @@
 <?php
+// /!\/!\/!\/!\/!\/!\/!\Faire attention au filme non trouvé, retourne des erreur /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
+
     include_once("tmdb/tmdb-api.php");
 
     $var = array();
     $var[] = array('1', "avenger");
     $var[] = array('2', "iron man");
     $var[] = array('3', "les 4 fantastiques");
-    $var[] = array('4', "moi moche et mechant");
+    $var[] = array('4', "lord of war");
 
     define("FILES_ID", 0);
     define("FILES_TITLE", 1);
@@ -43,27 +45,26 @@
     // =============================================================================
     function Word($var)
     {
+        $pdo = connectdb();
         foreach ($var as $data)
         {
             $id_movies_tmdb = Search_id_movie($data[FILES_TITLE]);//faire un continue en cas de non trouver id
             $Full_Info = Search_info_movie($id_movies_tmdb);
-            $id_movie_db = Insert_Movie($Full_Info);
-            Update_files($id_movie_db, $data[FILES_ID]);
+            $id_movie_db = Insert_Movie($Full_Info, $pdo);
+            Update_files($id_movie_db, $data[FILES_ID], $pdo);
 
             foreach ($Full_Info["genres"] as $row)
             {
-                if(($id_genres = getidGenre(get_object_vars($row)["name"])) === false)
+                if(($id_genres = getidGenre(get_object_vars($row)["name"], $pdo)) === false)
                 {
-                    $id_genres = Insert_Genre(get_object_vars($row)["name"]);
+                    $id_genres = Insert_Genre(get_object_vars($row)["name"], $pdo);
                 }
-
-                //insert_genres_Movie($id_genres, $id_movie_db);
+                insert_genres_Movie($id_genres, $id_movie_db, $pdo);
             }
-
             //var_dump($id_movie_db);
             //var_dump($Full_Info);
-        }
 
+        }
         return;
     }
     // =============================================================================
@@ -95,11 +96,9 @@
         return(get_object_vars(json_decode($Full_Info)));
     }
 
-    function Insert_Movie($movie)//fonction ok
+    function Insert_Movie($movie, $pdo)//fonction ok
     {
-        $pdo = connectdb();
         $req = $pdo->prepare('INSERT INTO `movies` (Title, Year, Length, Description, Poster) VALUE (?, ?, ?, ?, ?)');
-
         $req->bindParam(1, $movie["original_title"]);
         $req->bindParam(2, $movie["release_date"]);
         $req->bindParam(3, $movie["runtime"]);
@@ -110,9 +109,8 @@
         return($pdo->lastInsertId());
     }
 
-    function getidGenre($genre)//fonction ok
+    function getidGenre($genre, $pdo)//fonction ok
     {
-        $pdo = connectdb();
         $req = $pdo->prepare('SELECT * FROM `genres` WHERE Name = ?');
         $req->bindParam(1, $genre);
         $req->execute();
@@ -120,41 +118,52 @@
 
         if ($req->rowCount() > 0)
         {
-            return $resut["idGenres"];
+            return $result[0]["idGenres"];
         }
+
         return false;
     }
 
-
-
-
-    function Insert_Genre($movie)//fonction non ok
+    function Insert_Genre($genre, $pdo)//fonction ok
     {
-        $pdo = connectdb();
-        $id_genre_movie = array();
-
-        foreach ($movie["genres"] as $datas)
-        {
-
-
-            $req = $pdo->prepare('INSERT INTO `genres` (Name) VALUE (?)');
-            $data = get_object_vars($data);
-            $req->bindParam(1, $data["name"]);
-            $req->execute();
-            $id_genre_movie[] = $pdo->lastInsertId();
-        }
-        return $id_genre_movie;
+        $req = $pdo->prepare('INSERT INTO `genres` (Name) VALUES (?)');
+        $req->bindParam(1, $genre);
+        $req->execute();
+        return($pdo->lastInsertId());
     }
 
-    function Update_files($id_movie, $id_files)// fonction ok
+    function insert_genres_Movie($id_genres, $id_movie_db, $pdo)//fonction ok
     {
-        $pdo = connectdb();
+        $req = $pdo->prepare('INSERT INTO `genres_movies` (fkGenre, fkMovie) VALUES (?, ?)');
+        $req->bindParam(1, $id_genres);
+        $req->bindParam(2, $id_movie_db);
+        $req->execute();
+        return;
+    }
+
+    function Update_files($id_movie, $id_files, $pdo)// fonction ok
+    {
         $req = $pdo->prepare('UPDATE `files` SET fkMovie = ? WHERE idFiles = ?');
         $req->bindParam(1, $id_movie);
         $req->bindParam(2, $id_files);
         $req->execute();
 
         return;
+    }
+
+    function getidCountries($countrie)
+    {
+
+    }
+
+    function insert_Countries($countrie)
+    {
+
+    }
+
+    function insert_countrie_movie($id_movie_db, $id_countrie)
+    {
+
     }
 
 
