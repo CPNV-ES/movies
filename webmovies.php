@@ -34,8 +34,12 @@
             <p class="welcome">WELCOME !</p>
         	<p>You want to see the movies that you have in your datas ?</br>
 			Then, click right bellow and you will see them</p>
+<<<<<<< Updated upstream
 
 			<a class="btn" href>Display movies</a> <!-- bouton "Display movies" -->
+=======
+            
+>>>>>>> Stashed changes
         </div>
     </div>
 
@@ -100,6 +104,7 @@
             <div class="col-md-6 portfolio-item">
                 <div class="thumbnail">
                 	<h4>
+<<<<<<< Updated upstream
 						<?php
                             echo''.htmlspecialchars($row['film_nom']).'';
                         ?>
@@ -107,6 +112,15 @@
                    <p>
                    		<?php
                             echo''.htmlspecialchars($row['film_synopsis']).'';
+=======
+						<?php 
+                            echo''.htmlspecialchars($row['film_nom']).''; 
+                        ?>
+                    </h4>
+                   <p>
+                   		<?php 
+                            echo''.htmlspecialchars($row['film_synopsis']).''; 
+>>>>>>> Stashed changes
                         ?>
                    </p>
                 </div>
@@ -123,7 +137,7 @@
             <div class="col-lg-12">
                 <ul class="pagination">
                     <li>
-                        <a href="#">Previoux</a>
+                        <a href="#">Previous</a>
                     </li>
                     <li class="active">
                         <a href="#">1</a>

@@ -34,7 +34,7 @@
         	<p>You want to see the movies that you have in your datas ?</br> 
 			Then, click right bellow and you will see them</p>
             
-			<a class="btn" href>Display movies</a> <!-- bouton "Display movies" -->
+			<input type="button" OnClick="javascript:window.location.reload()" class="btn" value="Display movies" href><!-- bouton "Display movies" -->
         </div>
     </div>
         
@@ -60,8 +60,26 @@
                     <li>
                         <a class="menu" href="webmovies.php">Web movies</a>
                     </li>
+
                 </ul>
-            </div>
+                <div id="overlay">
+                    <div class="popup-block">
+                        <a class="close" href="#noWhere"><img alt="Fermer" title="Fermer la fenêtre" class="btn-close" src="css/imgs/exit.png"></a>
+                        <h2>Popup</h2>
+                        
+                        <p>Choose your options and give the link file of your movies.</p>
+                    
+                    </div>
+                </div>
+            	<p><a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
+                <!--
+            	<div id="overlay"><a href="#nowehere">Exit</a></div>
+                <a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
+                 do a opening window for the options 
+                	<a href="php/pages/options.php" onclick="window.open('','popup','width=auto, height=200, top=auto, left=auto, toolbar=0, location=0, directories=0, status=0, menubar=0, scrollbars=0, resizable=1')" target="popup"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
+                -->
+                   
+              </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -116,7 +134,7 @@
             <div class="col-lg-12">
                 <ul class="pagination">
                     <li>
-                        <a href="#">Previoux</a>
+                        <a href="#">Previous</a>
                     </li>
                     <li class="active">
                         <a href="#">1</a>

@@ -2,10 +2,11 @@
 
 //Cette méthode est fonctionnel si la classe db (classe de connexion a la base) est existante et si on appel cette classe dans la page ou on fait notre pagination.
 	$compteur = $DB->query("SELECT count(*) AS total FROM films"); 
-	//$nbAbonnes = $compteur->total;
-	foreach ($compteur as $ligne) {
-	$total = $ligne->total;
-		}
+	//$nbAbonnes = $compteur->total; 
+	foreach ($compteur as $ligne) { 
+	$total = $ligne->total; 
+		} 
+
 		$abonnesParPage = 20;
 		$nbPage = ceil($total/$abonnesParPage);
 		if(isset($_GET['page']) && $_GET['page']>0 && $_GET['page']<=$nbPage){
