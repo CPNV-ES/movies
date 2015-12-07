@@ -28,13 +28,13 @@
     <div class="header">
 
         <div class="page-header">
-            <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo du site -->
+            <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo -->
             
             <p class="welcome">WELCOME !</p>
         	<p>You want to see the movies that you have in your datas ?</br> 
 			Then, click right bellow and you will see them</p>
             
-			<input type="button" OnClick="javascript:window.location.reload()" class="btn" value="Display movies" href><!-- bouton "Display movies" -->
+			<input type="button" OnClick="javascript:window.location.reload()" class="btn" value="Display movies" href><!-- button "Display movies" -->
         </div>
     </div>
         
