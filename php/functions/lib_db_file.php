@@ -26,6 +26,33 @@ function getSourceId($db, $path){
     }
     return false;
 }
+
+
+/* Function getAllSources
+	Retourne tout les chemins sources de la base de donnée
+	Param :
+		- db : lien vers la base de donnée (PDO object)
+	Return : En succes = retourne un tableau avec tout les résultats, Echéc = False	*/
+function getAllSources($db){
+	$query  = 'SELECT sources.`idSources` FROM sources';
+
+    $req = $db->prepare($query);
+
+    if(!$req->execute()){
+        $error = $req->errorCode();
+        $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+		//echo $error;
+        return false;
+    }
+
+    if($req->rowCount() >= 1){
+        $result = $req->fetchALL();
+        return $result;
+    }
+    return false;
+}
+
+
 /* Function insertSource
 	insert une nouvelle source et renvoie l'id après l'insert
 	Param :
@@ -53,6 +80,8 @@ function insertSource($db, $path){
     }
     return false;
 }
+
+
 /* Function getTypeId
 	Retourne l'id du type de fichier demandé
 	Param :
@@ -81,6 +110,8 @@ function getTypeId($db, $file_type){
 
     return false;
 }
+
+
 /* Function getFile
 	Retourne le fichier vidéo dans la base de donnée s'il existe à l'emplacement demandé
 	Param :
@@ -121,6 +152,8 @@ function getFile($db, $source_id, $path, $file_name, $file_type_id){
 
     return false;
 }
+
+
 /* Function insertFile
 	insert le nouveau fichier selon les informations données et retourne son id
 	Param :
