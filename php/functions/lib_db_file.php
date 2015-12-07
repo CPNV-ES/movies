@@ -1,4 +1,10 @@
 <?php
+/* Function getSourceId
+	Recupére l'id en base de donnée de la source demandé
+	Param :
+		- db : lien vers la base de donnée (PDO object)
+		- path : chemin source demandé
+	Return : En succes = l'id de la source, Echéc = False	*/
 function getSourceId($db, $path){
     $query  = 'SELECT sources.`idSources` FROM sources ';
     $query .= 'WHERE sources.`Name` LIKE ? ';
@@ -20,6 +26,12 @@ function getSourceId($db, $path){
     }
     return false;
 }
+/* Function insertSource
+	insert une nouvelle source et renvoie l'id après l'insert
+	Param :
+		- db : lien vers la base de donnée (PDO object)
+		- path : chemin source à enregistré
+	Return : En succes = l'id de la source, Echéc = False	*/
 function insertSource($db, $path){
     $query  = 'INSERT INTO sources';
     $query .= '(`Name`) VALUE (?)';
@@ -41,6 +53,12 @@ function insertSource($db, $path){
     }
     return false;
 }
+/* Function getTypeId
+	Retourne l'id du type de fichier demandé
+	Param :
+		- db : lien vers la base de donnée (PDO object)
+		- file_type : valeur du type à rechercher
+	Return : En succes = l'id du type, Echéc = False	*/
 function getTypeId($db, $file_type){
     $query  = 'SELECT types.`idTypes` FROM types ';
     $query .= 'WHERE types.`Name` LIKE ? ';
@@ -63,6 +81,15 @@ function getTypeId($db, $file_type){
 
     return false;
 }
+/* Function getFile
+	Retourne le fichier vidéo dans la base de donnée s'il existe à l'emplacement demandé
+	Param :
+		- db : lien vers la base de donnée (PDO object)
+		- source_id : id de la source
+		- path : le chemin des sous dossiers à partir de la source
+		- file_name : nom du fichier
+		- file_type_id : id du type de fichier
+	Return : En succes = l'id du fichier, Echéc = False	*/
 function getFile($db, $source_id, $path, $file_name, $file_type_id){
     $query  = 'SELECT files.`idFiles` FROM files ';
     $query .= 'INNER JOIN paths ON paths.`idPaths` = files.`fkPaths` ';
@@ -94,7 +121,17 @@ function getFile($db, $source_id, $path, $file_name, $file_type_id){
 
     return false;
 }
+/* Function insertFile
+	insert le nouveau fichier selon les informations données et retourne son id
+	Param :
+		- db : lien vers la base de donnée (PDO object)
+		- source_id : id de la source
+		- path : le chemin des sous dossiers à partir de la source
+		- file_name : nom du fichier
+		- file_type_id : id du type de fichier
+	Return : En succes = l'id du fichier, Echéc = False	*/
 function insertFile($db, $source_id, $path, $file_name, $file_type_id){
+	//Insertion du sous dossier table PATHS
     $query  = 'INSERT INTO paths ';
     $query .= '(`fkSources`, `Name`) VALUES (?, ?)';
 
@@ -119,6 +156,7 @@ function insertFile($db, $source_id, $path, $file_name, $file_type_id){
         return false;
     }
 
+	//Insertion du fichier selon l'insertion précedente
     $query  = 'INSERT INTO files ';
     $query .= '(`fkTypes`, `fkPaths`, `Name`) VALUE (?, ?, ?)';
 

@@ -1,5 +1,11 @@
 <?php
+require_once("/php/configs/config.php");
 
+/* Function connectDB
+	Retourne l'object PDO connecter à la base de donnée
+	Param :
+		- Pris selon les configurations !
+	Return : En succes = object PDO, Echéc = False	*/
 function connectDB()
 {
 	try
