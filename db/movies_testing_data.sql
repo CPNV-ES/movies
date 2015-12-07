@@ -8,7 +8,7 @@ INSERT INTO `types` (Name) VALUES ("avi"), ("mp4"), ("mov");
 -- Files
 INSERT INTO `sources` (Name) VALUES ("Z:/Personnel/Vidéo/");
 INSERT INTO `paths` (Name, fkSources) VALUES ("Exemple/Test/A/", 1), ("Exemple/Test/B/", 1);
-INSERT INTO `files` (Name, fkMovies, fkTypes, fkPaths) VALUES ("Lord.Of.War.2005.FRENCH.VFR.avi", 1, 1, 1), ("Aliens.vs.Predators.(1990).DIVIX.mov", 2, 3, 2);
+INSERT INTO `files` (Name, fkMovies, fkTypes, fkPaths, FileTitle) VALUES ("Lord.Of.War.2005.FRENCH.VFR.avi", 1, 1, 1, "Lord Of War"), ("Aliens.vs.Predators.(1990).DIVIX.mov", 2, 3, 2,"Aliens vs Predators");
 
 -- Countries
 INSERT INTO `countries` (name) VALUES ("USA !"), ("Swiss") , ("Royaume Uni"), ("France");

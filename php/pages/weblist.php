@@ -1,27 +1,21 @@
 <?php
-    include_once("php/functions/lib_db_connect.php");
+    include_once("../functions/connect.php");
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <script type="text/javascript" src="js/display.js"></script>
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
-    
-    <title>Movies</title>
+
+    <title><?php echo $title ?></title>
 
     <!-- Bootstrap Core CSS -->
 
-    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="../../css/bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="../../css/style.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,16 +32,14 @@
     <div class="header">
 
         <div class="page-header">
-            <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo -->
+            <img class="logo" src="../../css/imgs/logo_mini_blanc.png"/><!-- logo du site -->
             
             <p class="welcome">WELCOME !</p>
-        	<p>You want to see the movies that you have in your datas ?</br> 
-			Then, click right bellow and you will see them</p>
-
-			<input type="button" id="display" OnClick="javascript:window.location.reload()" class="btn" value="Display movies" href><!-- bouton "Display movies" -->
+            <p>You want to see the movies that you have in your datas ?</br> 
+            Then, click right bellow and you will see them</p>
         </div>
     </div>
-        
+       
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -65,31 +57,13 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a class="menu" href="index.php">Your movies</a>
+                        <a class="menu" href="../../index.php">Your movies</a>
                     </li>
                     <li>
-                        <a class="menu" href="webmovies.php">Web movies</a>
+                        <a class="menu" href="weblist.php">Web movies</a>
                     </li>
-
                 </ul>
-                <div id="overlay">
-                    <div class="popup-block">
-                        <a class="close" href="#noWhere"><img alt="Fermer" title="Fermer la fenêtre" class="btn-close" src="css/imgs/exit.png"></a>
-                        <h2>Popup</h2>
-                        
-                        <p>Choose your options and give the link file of your movies.</p>
-                    
-                    </div>
-                </div>
-            	<p><a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
-                <!--
-            	<div id="overlay"><a href="#nowehere">Exit</a></div>
-                <a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                 do a opening window for the options 
-                	<a href="php/pages/options.php" onclick="window.open('','popup','width=auto, height=200, top=auto, left=auto, toolbar=0, location=0, directories=0, status=0, menubar=0, scrollbars=0, resizable=1')" target="popup"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                -->
-                   
-              </div>
+            </div>
             <!-- /.navbar-collapse -->
         </div>
         <!-- /.container -->
@@ -97,21 +71,9 @@
 
     <!-- Page Content -->
     <div class="container">
-
-        <form action="index.php" method="post">
-            <input type="text" name="requete" size="30" placeholder="recherche">
-            <input type="submit" value="Ok">
-        </form>
-
     <?php
 
-        echo '<div id=search>';
-                include_once("php/pages/search.php");
-        echo '</div>';
-
-        echo '<div id=1 style=display:none;>';
-                include_once("php/pages/display.php");
-        echo '</div>';
+        
     ?>
 
         <!-- Pagination -->
@@ -160,7 +122,11 @@
     </div>
     <!-- /.container -->
 
-    <script src="js/clear.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
 </body>
 
