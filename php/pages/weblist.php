@@ -1,5 +1,7 @@
 <?php
-    include_once("../functions/connect.php");
+    require_once("../functions/lib_db_connect.php");
+
+    $connect= connectDB();//Connect the object "connectDB"
 ?>
 
 <!DOCTYPE html>
@@ -8,8 +10,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="/js/display.js"></script>
 
-    <title><?php echo $title ?></title>
+    <title>Web Movies</title>
 
     <!-- Bootstrap Core CSS -->
 
@@ -37,6 +40,8 @@
             <p class="welcome">WELCOME !</p>
             <p>You want to see the movies that you have in your datas ?</br> 
             Then, click right bellow and you will see them</p>
+
+            <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies" href><!-- bouton "Display movies" -->
         </div>
     </div>
        
@@ -73,6 +78,9 @@
     <div class="container">
     <?php
 
+        echo '<div id=1 style=display:none;>';
+                include_once("display.php");
+        echo '</div>';
         
     ?>
 
@@ -127,6 +135,8 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/clear.js"></script>
 
 </body>
 

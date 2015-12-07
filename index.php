@@ -1,5 +1,7 @@
 <?php
-    include_once("php/functions/connect.php");
+    require_once("php/functions/lib_db_connect.php");
+
+    $connect= connectDB();//Connect the object "connectDB"
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +41,8 @@
         	<p>You want to see the movies that you have in your datas ?</br> 
 			Then, click right bellow and you will see them</p>
             
-			<input type="button" id="display" OnClick="javascript:window.location.reload()" class="btn" value="Display movies" href><!-- bouton "Display movies" -->
+			<!-- Comment -->
+            <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies" href><!-- bouton "Display movies" -->
         </div>
     </div>
         
@@ -63,7 +66,7 @@
                         <a class="menu" href="index.php">Your movies</a>
                     </li>
                     <li>
-                        <a class="menu" href="webmovies.php">Web movies</a>
+                        <a class="menu" href="php/pages/weblist.php">Web movies</a>
                     </li>
 
                 </ul>
@@ -97,7 +100,6 @@
             <input type="text" name="requete" size="30" placeholder="recherche">
             <input type="submit" value="Ok">
         </form>
-
     <?php
 
         echo '<div id=search>';
@@ -105,7 +107,7 @@
         echo '</div>';
 
         echo '<div id=1 style=display:none;>';
-                include_once("php/pages/display.php");
+                include_once("php/pages/display_movies_record.php");
         echo '</div>';
     ?>
 
@@ -155,13 +157,13 @@
     </div>
     <!-- /.container -->
 
-    <script src="js/clear.js"></script>
-
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
-
+    
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/clear.js"></script>
 
 </body>
 

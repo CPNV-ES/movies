@@ -6,8 +6,8 @@
         avec la fonction htmlspecialchars(). "htmlspecialchars() est utilisable en MySQL et PDO */
         $requete = htmlspecialchars($_POST['requete']);
 
-        $query = $cnx ->query("SELECT * FROM films 
-                                WHERE film_nom LIKE '%$requete%' ORDER BY id_films DESC") or die();
+        $query = $connect ->query("SELECT * FROM movies 
+                                WHERE Title LIKE '%$requete%' ORDER BY idMovies DESC") or die();
 
         /* On utilise la fonction mysql_num_rows pour compter les résultats pour vérifier par après */
         $count = $query->rowCount();
@@ -20,7 +20,7 @@
                 echo '<div class="row">
                         <div class="col-md-3 portfolio-item">
                             <div class="thumbnail">
-                                '.htmlspecialchars($donnees['film_nom']).'
+                                '.htmlspecialchars($donnees['Title']).'
                             </div>
                         </div>
                        </div>';
