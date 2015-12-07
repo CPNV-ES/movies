@@ -1,5 +1,5 @@
 <?php
-    include_once("php/functions/connect.php");
+    include_once("php/functions/lib_db_connect.php");
 ?>
 
 <!DOCTYPE html>
@@ -8,8 +8,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    
     <script type="text/javascript" src="js/display.js"></script>
-
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+    
     <title>Movies</title>
 
     <!-- Bootstrap Core CSS -->
@@ -33,12 +38,12 @@
     <div class="header">
 
         <div class="page-header">
-            <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo du site -->
+            <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo -->
             
             <p class="welcome">WELCOME !</p>
         	<p>You want to see the movies that you have in your datas ?</br> 
 			Then, click right bellow and you will see them</p>
-            
+
 			<input type="button" id="display" OnClick="javascript:window.location.reload()" class="btn" value="Display movies" href><!-- bouton "Display movies" -->
         </div>
     </div>
@@ -156,12 +161,6 @@
     <!-- /.container -->
 
     <script src="js/clear.js"></script>
-
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
 
 </body>
 
