@@ -47,24 +47,34 @@
         $pdo = connectdb();
         foreach ($var as $data)
         {
-            //verifier si le film n'est pas deja
+            //si fkmovie est notnull next film
+
+            //Verif si déja enregistré dans la base de données
             if(verif_movies($data[FILES_TITLE], $pdo)===true)
             {
-                echo "yolo";
+                //log("[Movie alredy registered], ".$data[FILES_TITLE]);
                 continue;
             }
 
-            $id_movies_tmdb = Search_id_movie($data[FILES_TITLE]);//faire un continue en cas de non trouver id
+            // Recherche de l'id du film dans theMovieDB
+            $id_movies_tmdb = Search_id_movie($data[FILES_TITLE]);
 
+            // Si l'id du film n'est pas trouvé dans theMovieDb alor on continue
             if ($id_movies_tmdb === false)
-            {// Si l'id du film n'est pas trouvé, je passe donc au film suivant
-                //log("[Non Trouvé] Movie is not found in tmbd, ".$data["FILES_TITLE"]);
+            {
+                //log("[Not Found] Movie is not found in tmbd, ".$data["FILES_TITLE"]);
                 continue;
             }
+            // on va rechercher toutes les informations dans TheMovieDb
             $Full_Info = Search_info_movie($id_movies_tmdb);
+
+            // On insert les information du films (Title, Year, tagline, Description, poster)
             $id_movie_db = Insert_Movie($Full_Info, $pdo);
+
+            // On update dans la table files le fkmovie pour correspondre à ce que jonahtan à inseré
             Update_files($id_movie_db, $data[FILES_ID], $pdo);
 
+            // la boucle suivant insert si il n'existe pas dans la bdd, le genre et le lie avec l'id du film
             foreach ($Full_Info["genres"] as $row)
             {
                 if(($id_genres = getidGenre(get_object_vars($row)["name"], $pdo)) === false)
@@ -73,7 +83,7 @@
                 }
                 insert_genres_Movie($id_genres, $id_movie_db, $pdo);
             }
-
+            // meme boucle que ci-dessus mais pour les countries
             foreach ($Full_Info["production_countries"] as $row)
             {
                 if(($id_countrie = getidCountries(get_object_vars($row)["name"], $pdo)) === false)
@@ -92,6 +102,14 @@
     // =============================================================================
     // =============================================================================
 
+    // verif_movies:
+    // Utilisation : Vas vérifier si le film existe déja dans la base de donnée
+    // Attribu:
+    //      - $movie -> Nom du film (récuperé par le scrit de jonathan)
+    //      - $pdo   -> Objet de connexion à la bdd
+    // Sortie:
+    //      - true   -> si le film et déja dans la bdd
+    //      - False  -> si le film n'y est pas
     function verif_movies($movie, $pdo)
     {
         $req = $pdo->prepare('SELECT * FROM `files` WHERE fileTitle = ?');
@@ -188,7 +206,7 @@
         return;
     }
 
-    function getidCountries($countrie, $pdo)//fonction à tester
+    function getidCountries($countrie, $pdo)//fonction ok
     {
         $req = $pdo->prepare('SELECT * FROM `countries` WHERE Name = ?');
         $req->bindParam(1, $countrie);
@@ -203,7 +221,7 @@
 
     }
 
-    function insert_Countries($countrie, $pdo)//fonction à tester
+    function insert_Countries($countrie, $pdo)//fonction ok
     {
         $req = $pdo->prepare('INSERT INTO `countries` (Name) VALUES (?)');
         $req->bindParam(1, $countrie);
@@ -212,10 +230,8 @@
         echo "countrie";
     }
 
-    function insert_countrie_movie($id_countrie, $id_movie_db, $pdo)//fonction à tester
+    function insert_countrie_movie($id_countrie, $id_movie_db, $pdo)//fonction ok
     {
-        print_r("id movie :".$id_movie_db." - ");
-        print_r("id countrie :".$id_countrie."<br> ");
         $req = $pdo->prepare('INSERT INTO `countries_movies` (fkCountries, fkMovies) VALUES (?, ?)');
         $req->bindParam(1, $id_countrie);
         $req->bindParam(2, $id_movie_db);
