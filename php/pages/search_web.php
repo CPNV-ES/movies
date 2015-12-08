@@ -20,7 +20,7 @@
                 echo '<div class="row">
                         <div class="col-md-3 portfolio-item">
                             <div class="thumbnail">
-                                '.htmlspecialchars($donnees['Title']).'
+                                <b>'.htmlspecialchars($donnees['Title']).'</b>
                             </div>
                         </div>
                        </div>';
@@ -30,7 +30,7 @@
             else
             {
                 echo '<div class="row">
-                        <div class="col-md-3 portfolio-item">
+                        <div class="col-md-6 portfolio-item">
                             <div class="thumbnail">
                                 Pas de résultats
                             </div>

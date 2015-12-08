@@ -7,9 +7,9 @@
     while ($donnees = $query->fetch())
     {   
 ?>
- 	<div class="col-md-3 portfolio-item">
+ 	<div class="col-md-6 portfolio-item">
  		<div class="thumbnail">
- 			<?php echo'Titre: '.htmlspecialchars($donnees['Title']).''; ?><br>
+ 			<b><?php echo'Titre: '.htmlspecialchars($donnees['Title']).''; ?></b><br>
  			<?php echo'Année: '.htmlspecialchars($donnees['Year']).''; ?><br>
  			<?php echo'Durée: '.htmlspecialchars($donnees['Length']).' min'; ?><br>
  			<button id="<?php echo $donnee['idMovies'] ?>" onClick="More; return false;">Plus d'infos</button>

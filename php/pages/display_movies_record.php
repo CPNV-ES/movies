@@ -9,7 +9,7 @@
 ?>
  	<div class="col-md-3 portfolio-item">
  		<div class="thumbnail">
- 			<?php echo''.htmlspecialchars($donnees['Title']).''; ?>
+ 			<b><?php echo''.htmlspecialchars($donnees['Title']).''; ?></b>
  		</div>
  	</div>
 <?php
