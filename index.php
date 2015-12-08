@@ -13,6 +13,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
+    <!-- Display movies in the DB -->
     <script type="text/javascript" src="js/display.js"></script>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -148,10 +149,6 @@
         </footer>
 
     </div><!-- /.container -->
-
-    <script src="js/jquery.js"></script><!-- jQuery -->
-
-    <script src="js/bootstrap.min.js"></script><!-- Bootstrap Core JavaScript -->
 
     <script src="js/clear.js"></script><!-- Clear the display of the search -->
 

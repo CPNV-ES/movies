@@ -4,12 +4,12 @@
 	$query = $connect ->query("SELECT DISTINCT * FROM movies
 						   INNER JOIN files ON files.fkMovies = movies.idMovies ORDER BY idMovies") or die();   
 
-    while ($donnees = $query->fetch())
+    while ($data = $query->fetch())
     {   
 ?>
  	<div class="col-md-3 portfolio-item">
  		<div class="thumbnail">
- 			<?php echo''.htmlspecialchars($donnees['Title']).''; ?>
+ 			<?php echo''.htmlspecialchars($data['Title']).''; ?>
  		</div>
  	</div>
 <?php

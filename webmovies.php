@@ -10,7 +10,13 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Display movies in the DB -->
     <script type="text/javascript" src="js/display.js"></script>
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
 
     <title>Movies</title>
 
@@ -36,7 +42,7 @@
             <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo site -->
             <p class="welcome">WELCOME !</p>
             <p>Here you can see the movies taked from an application that</br> 
-               shows sou some details about your films selected before</p>
+               shows you some details about your films selected before</p>
             <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies" href><!-- button "Display movies" -->
         </div><!-- /.page-header -->
     </div><!-- /.header -->
@@ -131,10 +137,6 @@
         </footer>
 
     </div><!-- /.container -->
-
-    <script src="js/jquery.js"></script><!-- jQuery -->
-
-    <script src="js/bootstrap.min.js"></script><!-- Bootstrap Core JavaScript -->
 
     <script src="js/clear.js"></script><!-- Clear the display of the search -->
 
