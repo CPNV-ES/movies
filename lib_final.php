@@ -1,6 +1,4 @@
 <?php
-// /!\/!\/!\/!\/!\/!\/!\Faire attention au filme non trouvé, retourne des erreur /!\/!\/!\/!\/!\/!\/!\/!\/!\/!\
-
     include_once("tmdb/tmdb-api.php");
 
     $var = array();
@@ -42,13 +40,27 @@
     }
 
     // =============================================================================
+    //
     // =============================================================================
     function Word($var)
     {
         $pdo = connectdb();
         foreach ($var as $data)
         {
+            //verifier si le film n'est pas deja
+            if(verif_movies($data[FILES_TITLE], $pdo)===true)
+            {
+                echo "yolo";
+                continue;
+            }
+
             $id_movies_tmdb = Search_id_movie($data[FILES_TITLE]);//faire un continue en cas de non trouver id
+
+            if ($id_movies_tmdb === false)
+            {// Si l'id du film n'est pas trouvé, je passe donc au film suivant
+                //log("[Non Trouvé] Movie is not found in tmbd, ".$data["FILES_TITLE"]);
+                continue;
+            }
             $Full_Info = Search_info_movie($id_movies_tmdb);
             $id_movie_db = Insert_Movie($Full_Info, $pdo);
             Update_files($id_movie_db, $data[FILES_ID], $pdo);
@@ -61,6 +73,16 @@
                 }
                 insert_genres_Movie($id_genres, $id_movie_db, $pdo);
             }
+
+            foreach ($Full_Info["production_countries"] as $row)
+            {
+                if(($id_countrie = getidCountries(get_object_vars($row)["name"], $pdo)) === false)
+                {
+                    $id_countrie = Insert_Countries(get_object_vars($row)["name"], $pdo);
+                }
+                insert_countrie_movie($id_countrie, $id_movie_db, $pdo);
+
+            }
             //var_dump($id_movie_db);
             //var_dump($Full_Info);
 
@@ -70,6 +92,22 @@
     // =============================================================================
     // =============================================================================
 
+    function verif_movies($movie, $pdo)
+    {
+        $req = $pdo->prepare('SELECT * FROM `files` WHERE fileTitle = ?');
+        $req->bindParam(1, $movie);
+        $req->execute();
+        $result = $req->fetchAll();
+
+        if (($req->rowCount() > 0 )&&($result[0]["fkMovie"]))
+        {
+            echo "true ";
+            return true;
+        }
+        return false;
+    }
+
+
 
     function Search_id_movie ($var) //fonction ok
     {
@@ -77,7 +115,7 @@
         $var = str_replace(" ", "+", $var);
         $idmovie = $tmdb->searchMovie($var);
 
-        if(empty($idmovie)) return $idmovie = null;
+        if(empty($idmovie)) return false;
         //var_dump($idmovie[0]->GetID());
         return $idmovie[0]->GetID();
     }
@@ -120,7 +158,6 @@
         {
             return $result[0]["idGenres"];
         }
-
         return false;
     }
 
@@ -134,7 +171,7 @@
 
     function insert_genres_Movie($id_genres, $id_movie_db, $pdo)//fonction ok
     {
-        $req = $pdo->prepare('INSERT INTO `genres_movies` (fkGenre, fkMovie) VALUES (?, ?)');
+        $req = $pdo->prepare('INSERT INTO `genres_movies` (fkGenres, fkMovies) VALUES (?, ?)');
         $req->bindParam(1, $id_genres);
         $req->bindParam(2, $id_movie_db);
         $req->execute();
@@ -151,18 +188,39 @@
         return;
     }
 
-    function getidCountries($countrie)
+    function getidCountries($countrie, $pdo)//fonction à tester
     {
+        $req = $pdo->prepare('SELECT * FROM `countries` WHERE Name = ?');
+        $req->bindParam(1, $countrie);
+        $req->execute();
+        $result = $req->fetchAll();
+
+        if ($req->rowCount() > 0)
+        {
+            return $result[0]["idCountries"];
+        }
+        return false;
 
     }
 
-    function insert_Countries($countrie)
+    function insert_Countries($countrie, $pdo)//fonction à tester
     {
-
+        $req = $pdo->prepare('INSERT INTO `countries` (Name) VALUES (?)');
+        $req->bindParam(1, $countrie);
+        $req->execute();
+        return($pdo->lastInsertId());
+        echo "countrie";
     }
 
-    function insert_countrie_movie($id_movie_db, $id_countrie)
+    function insert_countrie_movie($id_countrie, $id_movie_db, $pdo)//fonction à tester
     {
+        print_r("id movie :".$id_movie_db." - ");
+        print_r("id countrie :".$id_countrie."<br> ");
+        $req = $pdo->prepare('INSERT INTO `countries_movies` (fkCountries, fkMovies) VALUES (?, ?)');
+        $req->bindParam(1, $id_countrie);
+        $req->bindParam(2, $id_movie_db);
+        $req->execute();
+        return;
 
     }
 

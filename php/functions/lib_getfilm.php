@@ -1,5 +1,5 @@
 <?php
-require_once("../configs/lib_config.php");
+require_once("../configs/config.php");
 require_once("./lib_db_file.php");
 require_once("./lib_db_connect.php");
 
@@ -90,7 +90,7 @@ function listFile(&$result, $path){
 	Return : En succes = True, Echéc = False	*/
 function getFilms (&$return, $paths = NULL){
 	$error = "";
-	$db = connect();
+	$db = connectDB();
 	if(!isset($paths)){
 		if(defined("PATHS")){
 			$paths = unserialize(PATHS);
@@ -135,7 +135,7 @@ function getFilms (&$return, $paths = NULL){
 
 			//base de donnée
 			if(($file_id = getFile($db, $source_id, $row[RESULT_PATH_CLEAR], $row[RESULT_NAME], $file_type_id)) === false){
-				$file_id = insertFile($db, $source_id, $row[RESULT_PATH_CLEAR], $row[RESULT_NAME], $file_type_id);
+				$file_id = insertFile($db, $source_id, $row[RESULT_PATH_CLEAR], $row[RESULT_NAME], $title, $file_type_id);
 			}
 
 			if($title !== false){

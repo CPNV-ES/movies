@@ -26,6 +26,33 @@ function getSourceId($db, $path){
     }
     return false;
 }
+
+
+/* Function getAllSources
+	Retourne tout les chemins sources de la base de donnée
+	Param :
+		- db : lien vers la base de donnée (PDO object)
+	Return : En succes = retourne un tableau avec tout les résultats, Echéc = False	*/
+function getAllSources($db){
+	$query  = 'SELECT sources.`idSources` FROM sources';
+
+    $req = $db->prepare($query);
+
+    if(!$req->execute()){
+        $error = $req->errorCode();
+        $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+		//echo $error;
+        return false;
+    }
+
+    if($req->rowCount() >= 1){
+        $result = $req->fetchALL();
+        return $result;
+    }
+    return false;
+}
+
+
 /* Function insertSource
 	insert une nouvelle source et renvoie l'id après l'insert
 	Param :
@@ -53,6 +80,8 @@ function insertSource($db, $path){
     }
     return false;
 }
+
+
 /* Function getTypeId
 	Retourne l'id du type de fichier demandé
 	Param :
@@ -81,6 +110,8 @@ function getTypeId($db, $file_type){
 
     return false;
 }
+
+
 /* Function getFile
 	Retourne le fichier vidéo dans la base de donnée s'il existe à l'emplacement demandé
 	Param :
@@ -121,6 +152,8 @@ function getFile($db, $source_id, $path, $file_name, $file_type_id){
 
     return false;
 }
+
+
 /* Function insertFile
 	insert le nouveau fichier selon les informations données et retourne son id
 	Param :
@@ -128,9 +161,10 @@ function getFile($db, $source_id, $path, $file_name, $file_type_id){
 		- source_id : id de la source
 		- path : le chemin des sous dossiers à partir de la source
 		- file_name : nom du fichier
+		- title : nom du fichier propre
 		- file_type_id : id du type de fichier
 	Return : En succes = l'id du fichier, Echéc = False	*/
-function insertFile($db, $source_id, $path, $file_name, $file_type_id){
+function insertFile($db, $source_id, $path, $file_name, $title, $file_type_id){
 	//Insertion du sous dossier table PATHS
     $query  = 'INSERT INTO paths ';
     $query .= '(`fkSources`, `Name`) VALUES (?, ?)';
@@ -158,12 +192,13 @@ function insertFile($db, $source_id, $path, $file_name, $file_type_id){
 
 	//Insertion du fichier selon l'insertion précedente
     $query  = 'INSERT INTO files ';
-    $query .= '(`fkTypes`, `fkPaths`, `Name`) VALUE (?, ?, ?)';
+    $query .= '(`fkTypes`, `fkPaths`, `Name`, `FileTitle`) VALUE (?, ?, ?, ?)';
 
     $req = $db->prepare($query);
     $req->bindParam(1, $file_type_id);
     $req->bindParam(2, $path_id);
     $req->bindParam(3, $file_name);
+	$req->bindParam(4, $title);
 
     if(!$req->execute()){
         $error = $req->errorCode();
