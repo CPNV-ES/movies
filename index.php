@@ -44,18 +44,9 @@
             <p class="welcome">WELCOME !</p>
             <p>You want to see the movies that you have in your datas ?</br> 
                Then, click right bellow and you will see them</p>
-            <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies" href><!-- button "Display movies" -->
+            <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies"><!-- button "Display movies" -->
         </div><!-- /.page-header -->
     </div><!-- /.header -->
-            <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo -->
-            
-            <p class="welcome">WELCOME !</p>
-        	<p>You want to see the movies that you have in your datas ?</br> 
-			Then, click right bellow and you will see them</p>
-
-			<input type="button" id="display" OnClick="javascript:window.location.reload()" class="btn" value="Display movies" href><!-- bouton "Display movies" -->
-        </div>
-    </div>
         
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -85,7 +76,7 @@
                         <h2>Popup</h2>
                         
                         <p>Choose your options and give the link file of your movies.</p><br>
-                        <a href="javascript:window.location.reload()" class="btn">Refresh</a>
+                        <input type="button" id="reload" onClick="javascript:window.location.reload()" class="btn" value="Reload">
                     </div><!-- /.popup-block -->
                 </div><!-- /.overplay -->
             	<p><a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
