@@ -1,10 +1,16 @@
+<?php
+    require_once("php/functions/lib_db_connect.php");
+
+    $connect= connectDB();//Connect the object "connectDB"
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="js/display.js"></script>
 
     <title>Movies</title>
 
@@ -25,24 +31,16 @@
 
 <body>
     <!-- Page Header -->
-
     <div class="header">
-
         <div class="page-header">
-            <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo du site -->
-
+            <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo site -->
             <p class="welcome">WELCOME !</p>
-        	<p>You want to see the movies that you have in your datas ?</br>
-			Then, click right bellow and you will see them</p>
-<<<<<<< Updated upstream
-
-			<a class="btn" href>Display movies</a> <!-- bouton "Display movies" -->
-=======
-            
->>>>>>> Stashed changes
-        </div>
-    </div>
-
+            <p>Here you can see the movies taked from an application that</br> 
+               shows sou some details about your films selected before</p>
+            <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies" href><!-- button "Display movies" -->
+        </div><!-- /.page-header -->
+    </div><!-- /.header -->
+        
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -54,9 +52,8 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            </div><!-- /.navbar-header -->
+            <!-- Collect the nav links, forms, and other content for toggling --> 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
@@ -66,74 +63,38 @@
                         <a class="menu" href="webmovies.php">Web movies</a>
                     </li>
                 </ul>
-            </div>
-            <!-- /.navbar-collapse -->
-        </div>
-        <!-- /.container -->
+                <!--
+                <div id="overlay"><a href="#nowehere">Exit</a></div>
+                <a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
+                 do a opening window for the options 
+                    <a href="php/pages/options.php" onclick="window.open('','popup','width=auto, height=200, top=auto, left=auto, toolbar=0, location=0, directories=0, status=0, menubar=0, scrollbars=0, resizable=1')" target="popup"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
+                --> 
+              </div><!-- /.navbar-collapse -->
+        </div><!-- /.container -->
     </nav>
 
     <!-- Page Content -->
     <div class="container">
 
+        <div class="search">
+            <form action="webmovies.php" method="post">
+                <input type="text" name="requete" size="30" placeholder="recherche">
+                <input type="submit" value="Ok">
+            </form>
+        </div><!-- /.search -->
 
-        <!-- /.row -->
-		<?php
-			//$id_films = $_POST['id_films']; // Récupération de la données data{}
-			//1 - connexion au serveur de BD
-			$link = mysqli_connect("localhost", "root", "", "cinema_aida") or die("Problème de connexion...");
+        <?php
+            echo '<div id=search>';
+                    include_once("php/pages/search_web.php");//Include the function search
+            echo '</div>';
 
-			if (!mysqli_set_charset($link, "utf8")){
-				printf("Erreur lors du chargement du jeu de caractères utf8 : %s\n",
-				mysqli_error($link));
-			}
-
-			//2 - envoi de la requête
-			$sql = "SELECT DISTINCT film_nom, film_annee, film_genre, film_duree, film_img, film_synopsis FROM films INNER JOIN cinema ON cinema.id_cinema=cinema.id_cinema ORDER BY film_annee DESC LIMIT 4";
-			$result = mysqli_query($link, $sql);
-
+            echo '<div id=1 style=display:none;>';
+                    include_once("php/pages/display_movies_web.php");//Include the function display
+            echo '</div>';
         ?>
-
-        <!-- Projects Row -->
-
-        <div class="row">
-            <!-- boucle pour afficher les films et description -->
-            <?php
-				while ($row=mysqli_fetch_array($result)){
-            ?>
-
-            <div class="col-md-6 portfolio-item">
-                <div class="thumbnail">
-                	<h4>
-<<<<<<< Updated upstream
-						<?php
-                            echo''.htmlspecialchars($row['film_nom']).'';
-                        ?>
-                    </h4>
-                   <p>
-                   		<?php
-                            echo''.htmlspecialchars($row['film_synopsis']).'';
-=======
-						<?php 
-                            echo''.htmlspecialchars($row['film_nom']).''; 
-                        ?>
-                    </h4>
-                   <p>
-                   		<?php 
-                            echo''.htmlspecialchars($row['film_synopsis']).''; 
->>>>>>> Stashed changes
-                        ?>
-                   </p>
-                </div>
-            </div>
-            <?php
-				}
-            ?>
-        </div>
-        <!-- /.row -->
 
         <!-- Pagination -->
         <div class="row text-center">
-
             <div class="col-lg-12">
                 <ul class="pagination">
                     <li>
@@ -158,30 +119,26 @@
                         <a href="#">Next</a>
                     </li>
                 </ul>
-            </div>
-        </div>
-        <!-- /.row -->
-
+            </div><!-- /.col-lg-12 -->
+        </div><!-- /.row -->
 
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-
-                </div>
-
-            </div>
-            <!-- /.row -->
+                </div><!-- /.col-lg-12 -->
+            </div><!-- /.row -->
         </footer>
 
-    </div>
-    <!-- /.container -->
+    </div><!-- /.container -->
 
-    <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="js/jquery.js"></script><!-- jQuery -->
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script><!-- Bootstrap Core JavaScript -->
+
+    <script src="js/clear.js"></script><!-- Clear the display of the search -->
+
 
 </body>
+
 </html>
