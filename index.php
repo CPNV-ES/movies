@@ -80,7 +80,6 @@
                     	<input type="button" id="reload" OnClick="javascript:window.location.reload()" class="btn" value="Reload Page"><!-- bouton qui rafraichis la page -->
                     </div>
                 </div>
-
             	<p><a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
                 <!--
             	<div id="overlay"><a href="#nowehere">Exit</a></div>

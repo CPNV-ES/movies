@@ -33,25 +33,15 @@
     <!-- Page Header -->
     <div class="header">
         <div class="page-header">
-<<<<<<< HEAD
-            <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo -->
-
-            <p class="welcome">WELCOME !</p>
-        	<p>You want to see the movies that you have in your datas ?</br>
-			Then, click right bellow and you will see them</p>
-        </div>
-    </div>
-
-=======
             <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo site -->
+            
             <p class="welcome">WELCOME !</p>
             <p>Here you can see the movies taked from an application that</br> 
-               shows sou some details about your films selected before</p>
+               shows you some details about your films selected before</p>
             <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies" href><!-- button "Display movies" -->
         </div><!-- /.page-header -->
     </div><!-- /.header -->
         
->>>>>>> a2ec6488dca72fa2463bc8fb2ad496537e6a39ff
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -104,37 +94,6 @@
             echo '</div>';
         ?>
 
-<<<<<<< HEAD
-        <!-- Projects Row -->
-
-        <div class="row">
-            <!-- boucle pour afficher les films et description -->
-            <?php
-				while ($row=mysqli_fetch_array($result)){
-            ?>
-
-            <div class="col-md-6 portfolio-item">
-                <div class="thumbnail">
-                	<h4>
-						<?php
-                            echo''.htmlspecialchars($row['film_nom']).'';
-                        ?>
-                    </h4>
-                   <p>
-                   		<?php
-                            echo''.htmlspecialchars($row['film_synopsis']).'';
-                        ?>
-                   </p>
-                </div>
-            </div>
-            <?php
-				}
-            ?>
-        </div>
-        <!-- /.row -->
-
-=======
->>>>>>> a2ec6488dca72fa2463bc8fb2ad496537e6a39ff
         <!-- Pagination -->
         <div class="row text-center">
             <div class="col-lg-12">
