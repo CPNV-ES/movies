@@ -78,7 +78,7 @@
                         <h2>Popup</h2>
                         
                         <p>Choose your options and give the link file of your movies.</p>
-                    
+                    	<input type="button" id="reload" OnClick="javascript:window.location.reload()" class="btn" value="Reload Page" href><!-- bouton qui rafraichis la page -->
                     </div>
                 </div>
             	<p><a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
