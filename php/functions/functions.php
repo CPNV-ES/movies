@@ -22,14 +22,17 @@
 	// Pour afficher les résultats de la recherche
 	...
 	<?php
-	for ($i=1; $i<=$nbPage; $i++){
-	if($i == $cPage){
-		echo "<li><a href='#'>$i</a></li>";
-	}
-
-	else{
-		echo "<li><a href='listeAbonnes.php?page=$i'>$i</a></li>";
-	}
+	for ($i=1; $i<=$nbPage; $i++)
+	{
+		if($i == $cPage)
+		{
+			echo "<li><a href='#'>$i</a></li>";
+		}
+	
+		else
+		{
+			echo "<li><a href='listeAbonnes.php?page=$i'>$i</a></li>";
+		}
 
 	}
 ?>

@@ -6,8 +6,8 @@
         avec la fonction htmlspecialchars(). "htmlspecialchars() est utilisable en MySQL et PDO */
         $requete = htmlspecialchars($_POST['requete']);
 
-        $query = $cnx ->query("SELECT * FROM films 
-                                WHERE film_nom LIKE '%$requete%' ORDER BY id_films DESC") or die();
+        $query = $connect ->query("SELECT * FROM movies 
+                                WHERE Title LIKE '%$requete%' ORDER BY idMovies") or die();
 
         /* On utilise la fonction mysql_num_rows pour compter les résultats pour vérifier par après */
         $count = $query->rowCount();
@@ -15,26 +15,32 @@
         if($count != 0)
         {
             /* On fait un while pour afficher la liste des fonctions trouvées, ainsi que l'id qui permettra de faire le lien vers la page de la fonction */
-            while($donnees = $query->fetch())
+            while($data = $query->fetch())
             {
-                echo '<div class="row">
-                        <div class="col-md-3 portfolio-item">
+                echo '<div class="col-md-3 portfolio-item">
                             <div class="thumbnail">
-                                '.htmlspecialchars($donnees['film_nom']).'
+<<<<<<< HEAD
+                               <b>'.htmlspecialchars($donnees['Title']).'</b>
                             </div>
-                        </div>
                        </div>';
+=======
+                                '.htmlspecialchars($data['Title']).'
+                            </div>
+                        </div>';
+>>>>>>> 2b8e7cbb7766cfb952ff2198ae2f488c16da50c2
                 }      
             }
             /* Affichage d'un message d'erreur*/      
             else
             {
-                echo '<div class="row">
-                        <div class="col-md-3 portfolio-item">
+                echo '<div class="col-md-3 portfolio-item">
                             <div class="thumbnail">
                                 Pas de résultats
                             </div>
-                        </div>
+<<<<<<< HEAD
                       </div>'; 
+=======
+                        </div>'; 
+>>>>>>> 2b8e7cbb7766cfb952ff2198ae2f488c16da50c2
             }
         }
