@@ -15,13 +15,19 @@
         if($count != 0)
         {
             /* On fait un while pour afficher la liste des fonctions trouvées, ainsi que l'id qui permettra de faire le lien vers la page de la fonction */
-            while($donnees = $query->fetch())
+            while($data = $query->fetch())
             {
                 echo '<div class="col-md-3 portfolio-item">
                             <div class="thumbnail">
+<<<<<<< HEAD
                                <b>'.htmlspecialchars($donnees['Title']).'</b>
                             </div>
                        </div>';
+=======
+                                '.htmlspecialchars($data['Title']).'
+                            </div>
+                        </div>';
+>>>>>>> 2b8e7cbb7766cfb952ff2198ae2f488c16da50c2
                 }      
             }
             /* Affichage d'un message d'erreur*/      
@@ -31,6 +37,10 @@
                             <div class="thumbnail">
                                 Pas de résultats
                             </div>
+<<<<<<< HEAD
                       </div>'; 
+=======
+                        </div>'; 
+>>>>>>> 2b8e7cbb7766cfb952ff2198ae2f488c16da50c2
             }
         }
