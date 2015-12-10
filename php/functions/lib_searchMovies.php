@@ -6,7 +6,9 @@
 		- db : connector PDO of the db
 	Return : Success = array of film, Echec = False	*/
 function getAllFilm($db){
-	$query  = 'SELECT movies.`idMovies`, movies.`Title` FROM movies';
+	$query  = 'SELECT movies.`idMovies`, movies.`Title`, files.`idFiles` FROM movies ';
+	$query .= 'INNER JOIN files ON files.`fkMovies` = movies.`idMovies` ';
+	$query .= 'GROUP BY `movies.`idMovies';
 
     $req = $db->prepare($query);
 
