@@ -77,7 +77,8 @@
                         <h2>Popup</h2>
                         
                         <p>Choose your options and give the link file of your movies.</p><br>
-                        <input type="button" id="reload" onClick="javascript:window.location.reload()" class="btn" value="Reload"><!-- button Rafraichissement de la page -->
+                        <input type="button" id="reload" onClick="javascript:window.location.reload()" class="btn" value="Reload"><!-- button to reload the page -->
+                    
                     </div><!-- /.popup-block -->
                 </div><!-- /.overplay -->
             	<p><a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a></p>

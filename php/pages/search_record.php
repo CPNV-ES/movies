@@ -19,15 +19,9 @@
             {
                 echo '<div class="col-md-3 portfolio-item">
                             <div class="thumbnail">
-<<<<<<< HEAD
-                               <b>'.htmlspecialchars($donnees['Title']).'</b>
+                               <b>'.htmlspecialchars($data['Title']).'</b>
                             </div>
                        </div>';
-=======
-                                '.htmlspecialchars($data['Title']).'
-                            </div>
-                        </div>';
->>>>>>> 2b8e7cbb7766cfb952ff2198ae2f488c16da50c2
                 }      
             }
             /* Affichage d'un message d'erreur*/      
@@ -37,10 +31,6 @@
                             <div class="thumbnail">
                                 Pas de résultats
                             </div>
-<<<<<<< HEAD
                       </div>'; 
-=======
-                        </div>'; 
->>>>>>> 2b8e7cbb7766cfb952ff2198ae2f488c16da50c2
             }
         }

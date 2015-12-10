@@ -17,11 +17,7 @@
     <script src="js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-<<<<<<< HEAD
-    
-=======
 
->>>>>>> 2b8e7cbb7766cfb952ff2198ae2f488c16da50c2
     <title>Movies</title>
 
     <!-- Bootstrap Core CSS -->

@@ -20,11 +20,8 @@
                 echo '<div class="row">
                         <div class="col-md-3 portfolio-item">
                             <div class="thumbnail">
-<<<<<<< HEAD
-                                <b>'.htmlspecialchars($donnees['Title']).'</b>
-=======
-                                '.htmlspecialchars($data['Title']).'
->>>>>>> 2b8e7cbb7766cfb952ff2198ae2f488c16da50c2
+                                <b>'.htmlspecialchars($data['Title']).'</b>
+
                             </div>
                         </div>
                        </div>';
