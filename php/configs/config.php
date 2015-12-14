@@ -15,4 +15,8 @@
 	define('DB_ACTOR_TYPE', 'Actor');
 	define('DB_DIRECTOR_TYPE', 'Director');
 	define('DB_PRODUCER_TYPE', 'Procuder');
+
+	//Constant for lib_final.php
+	define("FILES_ID", 0);
+    define("FILES_TITLE", 1);
  ?>
