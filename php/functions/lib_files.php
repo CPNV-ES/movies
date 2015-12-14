@@ -1,6 +1,6 @@
 <?php
 require_once("../configs/config.php");
-require_once("./lib_db_file.php");
+require_once("./lib_db_files.php");
 require_once("./lib_db_connect.php");
 
 /* Function getInfoFilm
