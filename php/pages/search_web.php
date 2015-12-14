@@ -1,41 +1,48 @@
 <?php
+  require_once('./php/functions/lib_searchMovies.php');
 
-    if(isset($_POST['requete']) && $_POST['requete'] != NULL)
-    {
-        /* On crée une variable $requete pour faciliter l'écriture de la requête SQL, mais aussi pour empêcher les éventuels malins qui utiliseraient du PHP ou du JS, 
-        avec la fonction htmlspecialchars(). "htmlspecialchars() est utilisable en MySQL et PDO */
-        $requete = htmlspecialchars($_POST['requete']);
+  if(isset($_POST['requete']) && $_POST['requete'] != NULL)
+  {
+      /* On crée une variable $requete pour faciliter l'écriture de la requête SQL, mais aussi pour empêcher les éventuels malins qui utiliseraient du PHP ou du JS,
+      avec la fonction htmlspecialchars(). "htmlspecialchars() est utilisable en MySQL et PDO */
+    $request = htmlspecialchars($_POST['requete']);
 
-        $query = $connect ->query("SELECT * FROM movies 
-                                WHERE Title LIKE '%$requete%' ORDER BY idMovies DESC") or die();
+    $movies = getInfoMovies($connect, ['Title' => ['%'.$request.'%', 'LIKE' ]]);
 
-        /* On utilise la fonction mysql_num_rows pour compter les résultats pour vérifier par après */
-        $count = $query->rowCount();
+    if($movies !== false){
+  		foreach($movies as $row)
+  		{
+			?>
+			 	<div class="col-md-6 portfolio-item">
+			 		<div class="thumbnail">
+			 			<b><?php echo 'Titre: '.$row['Title'].''; ?></b><br>
+			 			<?php echo 'Année: '.$row['Year'].''; ?><br>
+			 			<?php echo 'Durée: '.$row['Length'].' min'; ?><br>
+			 			<div id="overlay">
+			                    <div class="popup-block">
+			                        <a class="close" href=><img alt="Fermer" title="Fermer la fenêtre" class="btn-close" src="css/imgs/exit.png"></a>
+				                        <p><?php echo '<img src=../../image/'.$row['Poster'].'>'; ?></p>
+				                        <h2><?php echo ''.$row['Title'].''; ?></h2>
 
-        if($count != 0)
-        {
-            /* On fait un while pour afficher la liste des fonctions trouvées, ainsi que l'id qui permettra de faire le lien vers la page de la fonction */
-            while($data = $query->fetch())
-            {
-                echo '<div class="row">
-                        <div class="col-md-3 portfolio-item">
-                            <div class="thumbnail">
-                                <b>'.htmlspecialchars($data['Title']).'</b>
+				                        <p><?php echo 'Année: '.$row['Year'].''; ?></p>
+				                        <p><?php echo 'Durée: '.$row['Length'].' min'; ?></p>
+				                        <p><?php echo 'Durée: '.$row['Description'].' min'; ?></p>
+			                    </div><!-- /.popup-block -->
+			                </div><!-- /.overplay -->
+			            	<p><a href="#overlay" class="btn">Plus d'infos</a></p>
 
-                            </div>
-                        </div>
-                       </div>';
-                }      
-            }
-            /* Affichage d'un message d'erreur*/      
-            else
-            {
-                echo '<div class="row">
-                        <div class="col-md-6 portfolio-item">
-                            <div class="thumbnail">
-                                Pas de résultats
-                            </div>
-                        </div>
-                      </div>'; 
-            }
-        }
+			 		</div>
+			 	</div>
+		  <?php
+  		}
+  	}
+  	else{
+  		?>
+  		<div class="col-md-3 portfolio-item">
+  			<div class="thumbnail">
+  			  Pas de résultats
+  			</div>
+  		</div>
+  		<?php
+  	}
+  }
