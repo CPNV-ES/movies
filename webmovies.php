@@ -89,8 +89,16 @@
 
         <div class="search">
             <form action="webmovies.php" method="post">
-                <input type="text" name="requete" size="30" placeholder="Name of film">
-                <button>Filter</button>
+                <input type="hidden" name="send">
+                <input type="text" name="namefilm" size="30" placeholder="Name of film"><br><br>
+                <input type="year" name="year" size="4" placeholder="Year">
+                <input type="text" name="genre" size="15" placeholder="Genre">
+                <input type="text" name="namedirector" size="15" placeholder="Name of director">
+                <input type="text" name="nameactor" size="15" placeholder="Name of actor"><br><br>
+                <input type="text" name="studio" size="15" placeholder="Studio">
+                <input type="text" name="country" size="15" placeholder="Country">
+                <input type="text" name="writer" size="15" placeholder="Writer">
+                <input type="text" name="producer" size="15" placeholder="Producer">
                 <input type="submit" value="Search">
             </form>
         </div><!-- /.search -->

@@ -234,7 +234,7 @@ function getInfoMovies($db, $attr = array(), $filter = array()){
 	}
 
     $req = $db->prepare($query);
-
+    
     if(!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
