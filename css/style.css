@@ -138,3 +138,38 @@ button.close {
   background: transparent;
   border: 0;
 }
+.infos-block{
+	padding: 2%;
+	margin: 5%;
+	background-color: #d8d8d8;
+	height: auto;
+	width: auto;
+	}
+.infos-text-block{
+	margin: 5%;
+	}
+.modal{
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('imgs/ajax-loader.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+.loading{
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+.loading .modal{
+    display: block;
+}

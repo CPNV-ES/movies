@@ -75,10 +75,19 @@
                 <div id="overlay">
                     <div class="popup-block">
                         <a class="close" href=><img alt="Fermer" title="Fermer la fenêtre" class="btn-close" src="css/imgs/exit.png"></a>
-                        <h2>Popup</h2>
 
-                        <p>Choose your options and give the link file of your movies.</p><br>
-                        <input type="button" id="reload" onClick="javascript:window.location.reload()" class="btn" value="Reload"><!-- button to reload the page -->
+                        <h2>Options</h2>
+                        
+                        <p>Choose your options and give the link file of your movies.</p><br>  
+
+                        <!-- button to uplod the files on the computer -->           	                  
+                        <form method="post" action="mapage.php3" enctype="multipart/form-data"> 
+                        	<input type="hidden" name="max-file-size" value="300000"> <!-- limit the size of the file(s) to upload-->
+                        	<input type="file" name="mon-fichier" size="3" value="Browse">
+						</form>                        
+                        <br>    
+                        
+                        <input type="button" id="refresh" onClick="javascript:window.location.reload()" class="btn" value="Refresh"><!-- button to reload the page -->
 
                     </div><!-- /.popup-block -->
                 </div><!-- /.overplay -->

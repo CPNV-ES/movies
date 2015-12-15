@@ -13,23 +13,27 @@
 		{
 		    foreach($movies as $row)
 			{
-?>
-				<div class="col-md-3 portfolio-item">
-					<div class="thumbnail">
-						<b><?php echo''.$row['Title'].''; ?></b>
-					</div>
-				</div>
+?>				
+
+            <div class="col-md-3 portfolio-item">
+                <div class="thumbnail">
+                    <b><?php echo''.$row['Title'].''; ?></b>
+                </div>
+            </div>
+
 <?php
 			}
 		}
 		else
 		{
 ?>
-			<div class="col-md-3 portfolio-item">
-					<div class="thumbnail">
-						Pas de résultats
-					</div>
-			  </div>
+            <div class="col-md-3 portfolio-item">
+                <div class="thumbnail">
+                    Pas de résultats
+                </div>
+            </div>
+
 <?php
 		}
 	}
+

@@ -221,3 +221,4 @@ function insertFile($db, $source_id, $path, $file_name, $title, $file_type_id){
 
     return $file_id;
 }
+

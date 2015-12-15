@@ -17,7 +17,7 @@ function getMovies($db, $search_string = null){
 
 	$query .= 'GROUP BY movies.`idMovies`';
 
-  $req = $db->prepare($query);
+	$req = $db->prepare($query);
 	if($search_string !== null){
 		$search_string = '%'.$search_string.'%';
 		$req->bindParam(1, $search_string);
@@ -44,14 +44,22 @@ function getMovies($db, $search_string = null){
 		- db : connector PDO of the db
 		- id : id of Movies in DB
 	Return : Success = array of Genres, Echec = False	*/
-function getGenres($db, $id){
+function getGenres($db, $id, $filter = false){
 	$query  = 'SELECT genres.`Name` FROM movies ';
-  $query .= 'INNER JOIN genres_movies ON genres_movies.`fkMovies` = movies.`idMovies` ';
+	$query .= 'INNER JOIN genres_movies ON genres_movies.`fkMovies` = movies.`idMovies` ';
 	$query .= 'INNER JOIN genres ON genres.`idGenres` = genres_movies.`fkGenres` ';
-	$query .= 'WHERE movies.`idMovies` = ?';
+	$query .= 'WHERE movies.`idMovies` = ? ';
+	if($filter !== false){
+		$query .= 'AND genres.`Name` LIKE ?';
+	}
 
     $req = $db->prepare($query);
     $req->bindParam(1, $id);
+
+	if($filter !== false){
+		$filter = '%'.$filter.'%';
+		$req->bindParam(2, $filter);
+	}
 
     if(!$req->execute()){
         $error = $req->errorCode();
@@ -74,14 +82,22 @@ function getGenres($db, $id){
 		- db : connector PDO of the db
 		- id : id of Movies in DB
 	Return : Success = array of Genres, Echec = False	*/
-function getCountries($db, $id){
+function getCountries($db, $id, $filter = false){
 	$query  = 'SELECT countries.`Name` FROM movies ';
-  $query .= 'INNER JOIN countries_movies ON countries_movies.`fkMovies` = movies.`idMovies` ';
+	$query .= 'INNER JOIN countries_movies ON countries_movies.`fkMovies` = movies.`idMovies` ';
 	$query .= 'INNER JOIN countries ON countries.`idCountries` = countries_movies.`fkCountries` ';
-	$query .= 'WHERE movies.`idMovies` = ?';
+	$query .= 'WHERE movies.`idMovies` = ? ';
+	if($filter !== false){
+		$query .= 'AND countries.`Name` LIKE ?';
+	}
 
     $req = $db->prepare($query);
     $req->bindParam(1, $id);
+
+	if($filter !== false){
+		$filter = '%'.$filter.'%';
+		$req->bindParam(2, $filter);
+	}
 
     if(!$req->execute()){
         $error = $req->errorCode();
@@ -105,17 +121,25 @@ function getCountries($db, $id){
 		- id : id of Movies in DB
 		- type : role of people
 	Return : Success = array of People, Echec = False	*/
-function getPeople($db, $id, $type){
-	$query  = 'SELECT people.`FirstName`,people.`LastName` FROM movies ';
-  $query .= 'INNER JOIN people_movies ON people_movies.`fkMovies` = movies.`idMovies` ';
+function getPeople($db, $id, $type, $filter = false){
+	$query  = 'SELECT concat(people.`FirstName`, " ", people.`LastName`) AS FullName FROM movies ';
+	$query .= 'INNER JOIN people_movies ON people_movies.`fkMovies` = movies.`idMovies` ';
 	$query .= 'INNER JOIN types_role ON types_role.`idTypes_role` = people_movies.`fkTypes_Role` ';
 	$query .= 'INNER JOIN people ON people.`idPeople` = people_movies.`fkPeople` ';
 	$query .= 'WHERE movies.`idMovies` = ? ';
-	$query .= 'AND types_role.`type` LIKE ?';
+	$query .= 'AND types_role.`type` LIKE ? ';
+	if($filter !== false){
+		$query .= 'GROUP BY people.`idPeople` ';
+		$query .= 'HAVING  fullName LIKE ?';
+	}
 
     $req = $db->prepare($query);
     $req->bindParam(1, $id);
 	$req->bindParam(2, $type);
+
+	if($filter !== false){
+		$req->bindParam(3, $filter);
+	}
 
     if(!$req->execute()){
         $error = $req->errorCode();
@@ -138,14 +162,22 @@ function getPeople($db, $id, $type){
 		- db : connector PDO of the db
 		- id : id of Movies in DB
 	Return : Success = array of Studios, Echec = False	*/
-function getStudios($db, $id){
-	$query  = 'SELECT people.`FirstName`,people.`LastName` FROM movies ';
-  $query .= 'INNER JOIN studios_movies ON studios_movies.`fkMovies` = movies.`idMovies` ';
+function getStudios($db, $id, $filter = false){
+	$query  = 'SELECT studios.`idStudios`, studios.`Name` FROM movies ';
+	$query .= 'INNER JOIN studios_movies ON studios_movies.`fkMovies` = movies.`idMovies` ';
 	$query .= 'INNER JOIN studios ON studios.`idStudios` = studios_movies.`fkStudios` ';
 	$query .= 'WHERE movies.`idMovies` = ?';
+	if($filter !== false){
+		$query .= 'AND countries.`Name` LIKE ?';
+	}
 
     $req = $db->prepare($query);
     $req->bindParam(1, $id);
+
+	if($filter !== false){
+		$filter = '%'.$filter.'%';
+		$req->bindParam(2, $filter);
+	}
 
     if(!$req->execute()){
         $error = $req->errorCode();
@@ -177,10 +209,15 @@ function getStudios($db, $id){
 	$attr = array(
 			'field' => array(
 				'value', 'sign'
-			)
 		);
 	*/
-function getInfoMovies($db, $attr = array()){
+function getInfoMovies($db, $attr = array(), $filter = array()){
+	//recure filter array
+	$secur = array(	'genres' => false, 'studios'=> false,
+					'countries' => false, 'actor' => false,
+					'writer' => false, 'producer' => false, 'director' => false);
+	$filter = array_merge($secur, $filter);
+
 	$query  = 'SELECT * FROM movies ';
 	$query .= 'INNER JOIN files ON files.`fkMovies` = movies.`idMovies` ';
 
@@ -197,7 +234,7 @@ function getInfoMovies($db, $attr = array()){
 	}
 
     $req = $db->prepare($query);
-
+    
     if(!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
@@ -215,13 +252,39 @@ function getInfoMovies($db, $attr = array()){
 	for($i = 0, $size = count($result); $i < $size; $i++){
 		$id = $result[$i]["idMovies"];
 
-		$result[$i]["genres"] = getGenres($db, $id);
-		$result[$i]["countries"] = getCountries($db, $id);
-		$result[$i]["writer"] = getPeople($db, $id, DB_WRITER_TYPE);
-		$result[$i]["director"] = getPeople($db, $id, DB_DIRECTOR_TYPE);
-		$result[$i]["actor"] = getPeople($db, $id, DB_ACTOR_TYPE);
-		$result[$i]["producer"] = getPeople($db, $id, DB_PRODUCER_TYPE);
-		$result[$i]["studios"] = getStudios($db, $id);
+		if(($result[$i]["genres"] = getGenres($db, $id, $filter['genres'])) === false && $filter['genres'] !== false){
+			unset($result[$i]);
+			continue;
+		}
+
+		if(($result[$i]["countries"] = getCountries($db, $id, $filter['countries'])) === false && $filter['countries'] !== false){
+			unset($result[$i]);
+			continue;
+		}
+
+		if(($result[$i]["writer"] = getPeople($db, $id, DB_WRITER_TYPE, $filter['writer'])) === false && $filter['writer'] !== false){
+			unset($result[$i]);
+			continue;
+		}
+
+		if(($result[$i]["director"] = getPeople($db, $id, DB_DIRECTOR_TYPE, $filter['director'])) === false && $filter['director'] !== false){
+			unset($result[$i]);
+			continue;
+		}
+		if(($result[$i]["actor"] = getPeople($db, $id, DB_ACTOR_TYPE, $filter['actor'])) === false && $filter['actor'] !== false){
+			unset($result[$i]);
+			continue;
+		}
+
+		if(($result[$i]["producer"] = getPeople($db, $id, DB_PRODUCER_TYPE, $filter['producer'])) === false && $filter['producer'] !== false){
+			unset($result[$i]);
+			continue;
+		}
+
+		if(($result[$i]["studios"] = getStudios($db, $id, $filter['studios'])) === false && $filter['studios'] !== false){
+			unset($result[$i]);
+			continue;
+		}
 	}
 
 	return $result;

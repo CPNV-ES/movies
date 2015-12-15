@@ -1,8 +1,8 @@
 <?php
-//require_once("../configs/project_root.php");
 require_once(ROOT_PATH."php/configs/configs.php");
 require_once(ROOT_PATH."php/functions/lib_db_files.php");
 require_once(ROOT_PATH."php/functions/lib_db_connect.php");
+
 
 /* Function getInfoFilm
 	Permet de recuperer les informations du film dans les variabls title & type
@@ -78,77 +78,130 @@ function listFile(&$result, $path){
 			}
 			continue;
 		}
-    }
-
-	return true;
-}
-
-/* Function getFilms
-	Renvoie la totalité des films trouver si leur nom a été parse
-	Param :
-		- result : tableau récupérant l'ID d'insertion du fichier dans la DB et le nom du film parse
-		- path : Chaine de caractère contenant le chemin vers le dossier à scan
-	Return : En succes = True, Echéc = False	*/
-function getFilms (&$return, $paths = NULL){
-	$error = "";
-	$db = connectDB();
-	if(!isset($paths)){
-		if(defined("PATHS")){
-			$paths = unserialize(PATHS);
-		}
-
+	
 		return false;
 	}
-
-	foreach($paths as $path){
-		$path = str_replace('\\', '/', $path . '/'); //fucking windows
-
-		$result = NULL;
-		if(!listFile($result, $path)){
-			$error .= "Erreur sur l'ouverture du répértoire ('$path')\n";
+	
+	/* Function getDir
+		Permet de recuperer le pointeur sur le dossier voulu
+		Param :
+			- link : Conteneur du pointeur du fichier (Rempli à l'execution)
+			- path : Chaine de caractère contenant le chemin vers le dossier
+		Return : En succes = True, Echéc = False	*/
+	function getDir(&$link, $path){
+		if($link !== null)
+			return true;
+	
+		$link = opendir($path);
+		if($link === false){
+			$error = "Unable to open $path";
+			// echo $error;
+			return false;
 		}
-
-
-		//base de donnée
-		if(($source_id = getSourceId($db, $path)) === false){
-			$source_id = insertSource($db, $path);
+	
+		return true;
+	}
+	
+	/* Function listFile
+		list la totalité des fichiers présents dans un dossier
+		Param :
+			- result : tableau récupérant la totalité des fichiers présents dans le dossier source (fonction récursive)
+			- path : Chaine de caractère contenant le chemin vers le dossier à scan
+		Return : En succes = True, Echéc = False	*/
+	function listFile(&$result, $path){
+		if(!getDir($link, $path)){
+			return false;
 		}
-
-		$return = array();
-		foreach($result as $row)
+	
+		while (($entry = readdir($link)) !== false)
 		{
-			if(!getInfoOfFilm($row[RESULT_NAME], $title, $file_type)){
-				$error .= "Name is invalide " . $row[RESULT_NAME];
+			if($entry == "." || $entry == "..")
 				continue;
-			}
-
-			//base de donnée
-			if(($file_type_id = getTypeId($db, $file_type)) === false){
-				//PARANOIA use default type id : 1
-				$file_type_id = 1;
-			}
-
-			$row[RESULT_PATH_CLEAR] = str_replace($path, "", $row[RESULT_PATH]);
-
-			if(empty($row[RESULT_PATH_CLEAR])){
-				$row[RESULT_PATH_CLEAR] = ".";
-			}
-
-			//base de donnée
-			if(($file_id = getFile($db, $source_id, $row[RESULT_PATH_CLEAR], $row[RESULT_NAME], $file_type_id)) === false){
-				$file_id = insertFile($db, $source_id, $row[RESULT_PATH_CLEAR], $row[RESULT_NAME], $title, $file_type_id);
-			}
-
-			if($title !== false){
-				// echo $error;
-				$return[] = array($file_id, $title);
+	
+			if(is_dir($path . '/' . $entry)){
+				// recherche des fichiers dans le sous-dossier suivant
+				listFile($result, $path . '/' . $entry);
 			}
 			else{
-				$error .= "Titre non trouvé pour le fichier ('${row[RESULT_PATH]}${row[RESULT_NAME]}')";
+				if(is_file($path .'/' . $entry)){
+	
+					if(preg_match('/.*\.avi$/', $entry)){
+						$result[] = array($path . '/', $entry);
+					}
+				}
+				continue;
 			}
 		}
+	
+		return true;
 	}
-
-	//echo $error;
-	return true;
-}
+	
+	/* Function getFilms
+		Renvoie la totalité des films trouver si leur nom a été parse
+		Param :
+			- result : tableau récupérant l'ID d'insertion du fichier dans la DB et le nom du film parse
+			- path : Chaine de caractère contenant le chemin vers le dossier à scan
+		Return : En succes = True, Echéc = False	*/
+	function getFilms (&$return, $paths = NULL){
+		$error = "";
+		$db = connectDB();
+		if(!isset($paths)){
+			if(defined("PATHS")){
+				$paths = unserialize(PATHS);
+			}
+	
+			return false;
+		}
+	
+		foreach($paths as $path){
+			$path = str_replace('\\', '/', $path . '/'); //fucking windows
+	
+			$result = NULL;
+			if(!listFile($result, $path)){
+				$error .= "Erreur sur l'ouverture du répértoire ('$path')\n";
+			}
+	
+	
+			//base de donnée
+			if(($source_id = getSourceId($db, $path)) === false){
+				$source_id = insertSource($db, $path);
+			}
+	
+			$return = array();
+			foreach($result as $row)
+			{
+				if(!getInfoOfFilm($row[RESULT_NAME], $title, $file_type)){
+					$error .= "Name is invalide " . $row[RESULT_NAME];
+					continue;
+				}
+	
+				//base de donnée
+				if(($file_type_id = getTypeId($db, $file_type)) === false){
+					//PARANOIA use default type id : 1
+					$file_type_id = 1;
+				}
+	
+				$row[RESULT_PATH_CLEAR] = str_replace($path, "", $row[RESULT_PATH]);
+	
+				if(empty($row[RESULT_PATH_CLEAR])){
+					$row[RESULT_PATH_CLEAR] = ".";
+				}
+	
+				//base de donnée
+				if(($file_id = getFile($db, $source_id, $row[RESULT_PATH_CLEAR], $row[RESULT_NAME], $file_type_id)) === false){
+					$file_id = insertFile($db, $source_id, $row[RESULT_PATH_CLEAR], $row[RESULT_NAME], $title, $file_type_id);
+				}
+	
+				if($title !== false){
+					// echo $error;
+					$return[] = array($file_id, $title);
+				}
+				else{
+					$error .= "Titre non trouvé pour le fichier ('${row[RESULT_PATH]}${row[RESULT_NAME]}')";
+				}
+			}
+		}
+	
+		//echo $error;
+		return true;
+	}
