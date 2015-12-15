@@ -7,10 +7,12 @@
     while ($data = $query->fetch())
     {   
 ?>
- 	<div class="col-md-3 portfolio-item">
- 		<div class="thumbnail">
- 			<b><?php echo''.htmlspecialchars($dta['Title']).''; ?></b>
- 		</div>
+    <div class="row">
+        <div class="col-md-3 portfolio-item">
+            <div class="thumbnail">
+                <b><?php echo''.htmlspecialchars($data['Title']).''; ?></b>
+            </div>
+    </div>
 <?php
 	}
 ?>
