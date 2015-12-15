@@ -75,10 +75,10 @@
                 <div id="overlay">
                     <div class="popup-block">
                         <a class="close" href=><img alt="Fermer" title="Fermer la fenêtre" class="btn-close" src="css/imgs/exit.png"></a>
-                        <h2>Popup</h2>
+                        <h2>Options</h2>
 
                         <p>Choose your options and give the link file of your movies.</p><br>
-                        <input type="button" id="reload" onClick="javascript:window.location.reload()" class="btn" value="Reload"><!-- button to reload the page -->
+                        <input type="button" id="reload" onClick="javascript:window.location.reload()" class="btn" value="Refresh"><!-- button to reload the page -->
 
                     </div><!-- /.popup-block -->
                 </div><!-- /.overplay -->
