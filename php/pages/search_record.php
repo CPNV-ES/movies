@@ -9,25 +9,27 @@
 
 		$movies = getMovies($connect, $request);
 
-		if($movies !== false){
+		if($movies !== false)
+		{
 		    foreach($movies as $row)
 			{
-			?>
+?>
 				<div class="col-md-3 portfolio-item">
 					<div class="thumbnail">
 						<b><?php echo''.$row['Title'].''; ?></b>
 					</div>
 				</div>
-			<?php
+<?php
 			}
 		}
-		else{
-			?>
+		else
+		{
+?>
 			<div class="col-md-3 portfolio-item">
 					<div class="thumbnail">
 						Pas de résultats
 					</div>
 			  </div>
-			<?php
+<?php
 		}
 	}
