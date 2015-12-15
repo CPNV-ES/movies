@@ -73,9 +73,7 @@
               </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
-			
-<div class="infos-block">   		
-    <div class="infos-text-block">  
+
 <?php
 
 	$movies = getInfoMovies($connect, array('idMovies' => array($_GET['id'], '=')));
@@ -87,6 +85,10 @@
 	    print_r($movies);
 	    echo "</pre>";
     */
+
+    echo '<div class="infos-block">';  
+    echo '<img src="'.$movies['Poster'].'">';     
+    echo '<div class="infos-text-block">';   
 
     echo '<h2>'.$movies['Title'].'</h2><br>';
     echo 'Date de sortie: '.$movies['Year'].'';
@@ -109,7 +111,7 @@
         echo '<br>Réalisateurs: ';
         foreach($movies['director'] as $director)
         {           
-            echo $director['FirstName'].' '.$director['LastName'].' / ';
+            echo $director['FullName'].' / ';
         }
     }
     else
@@ -122,7 +124,7 @@
         echo '<br>Acteurs principaux: ';
         foreach($movies['actor'] as $actor)
         {           
-            echo $actor['FirstName'].' '.$actor['LastName'].' / ';
+            echo $actor['FullName'].' / ';
         }
     }
     else
@@ -161,7 +163,7 @@
         echo '<br>Scénaristes: ';
         foreach($movies['writer'] as $writer)
         {           
-            echo $writer['FirstName'].' '.$writer['LastName'].' / ';
+            echo $writer['FullName'].' / ';
         }
     }
     else
@@ -174,7 +176,7 @@
         echo '<br>Producteurs: ';
         foreach($movies['producer'] as $producer)
         {           
-            echo $producer['FirstName'].' '.$producer['LastName'].' / ';
+            echo $producer['FullName'].' / ';
         }
     }
     else
@@ -183,11 +185,11 @@
     }
 
     echo '<br>Description: '.$movies['Description'].' min';
+
+    echo '</div>'; 
+    echo '</div>'; 
     
-?>
-    
-    </div> 
-</div>  
+?> 
 
 </body>
 
