@@ -1,5 +1,5 @@
 <?php
-require_once("../configs/config.php");
+require_once("/php/configs/config.php");
 
 /* Function connectDB
 	Retourne l'object PDO connecter à la base de donnée
