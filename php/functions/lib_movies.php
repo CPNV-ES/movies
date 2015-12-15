@@ -49,18 +49,22 @@
             // on va rechercher toutes les informations dans TheMovieDb
             $Full_Info = Search_info_movie($id_movies_tmdb);
 
+            if($Full_Info === false)
+            {
+                continue;
+            }
 
-            if (verif_movie($Full_Info, $pdo) === false)
+            if (checkMovie($Full_Info, $pdo) === false)
             {
                 // On insert les information du films (Title, Year, tagline, Description, poster)
-                $id_movie_db = Insert_Movie($Full_Info, $pdo);
+                $id_movie_db = inserMovies($Full_Info, $pdo);
 
                 // la boucle suivant insert si il n'existe pas dans la bdd, le genre et le lie avec l'id du film
                 foreach ($Full_Info["genres"] as $row)
                 {
                     if(($id_genres = getidGenre(get_object_vars($row)["name"], $pdo)) === false)
                     {
-                        $id_genres = Insert_Genre(get_object_vars($row)["name"], $pdo);
+                        $id_genres = insertGenre(get_object_vars($row)["name"], $pdo);
                     }
                     insert_genres_Movie($id_genres, $id_movie_db, $pdo);
                 }
@@ -159,6 +163,8 @@
         $data = $tmdb->getMovie($id_tmdb);
 
         $Full_Info = $data->GetJSON();
+
+        if(empty($id_tmdb)) return false;
 
         return(get_object_vars(json_decode($Full_Info)));
     }
