@@ -138,16 +138,30 @@ button.close {
   background: transparent;
   border: 0;
 }
+/* div for all informations of movies */	
 .infos-block{
 	padding: 2%;
 	margin: 5%;
 	background-color: #d8d8d8;
 	height: auto;
 	width: auto;
-	}
+}
+/* div for poster of movies */	
+.infos-poster-block{
+	height: auto;
+	padding: 2%;
+}
+.poster{
+	width: 200px;
+	height: auto;
+	float: left;
+	margin-right: 5%;
+}
+/* div for informations of movies */	
 .infos-text-block{
-	margin: 5%;
-	}
+	height: auto;
+}
+/* loading */	
 .modal{
     display:    none;
     position:   fixed;

@@ -74,8 +74,6 @@
         </div><!-- /.container -->
     </nav>
 			
-<div class="infos-block">   		
-    <div class="infos-text-block">  
 <?php
 
 	$movies = getInfoMovies($connect, array('idMovies' => array($_GET['id'], '=')));
@@ -87,7 +85,13 @@
 	    print_r($movies);
 	    echo "</pre>";
     */
-
+	echo '<div class="infos-block">'; // global div
+	
+	echo '<div class="infos-poster-block">'; // div for the poster of the movie
+    echo '<img class="poster" src="'.$movies['Poster'].'">'; 
+   	echo '</div>';
+   
+    echo '<div class="infos-text-block">';  // div for the informations
     echo '<h2>'.$movies['Title'].'</h2><br>';
     echo 'Date de sortie: '.$movies['Year'].'';
     
@@ -184,11 +188,9 @@
 
     echo '<br>Description: '.$movies['Description'].' min';
     
+	echo '</div>';
 ?>
     
-    </div> 
-</div>  
-
 </body>
 
 </html>
