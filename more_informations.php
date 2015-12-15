@@ -1,5 +1,8 @@
 <?php
-	require_once("php/functions/lib_db_connect.php");
+	require_once("php/configs/project_root.php");
+	require_once(ROOT_PATH.'php/configs/configs.php');
+	require_once(ROOT_PATH."php/functions/lib_db_connect.php");
+	require_once(ROOT_PATH."php/functions/lib_searchMovies.php");
 
     $connect= connectDB();//Connect the object "connectDB"
 ?>
@@ -9,14 +12,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- Display movies in the DB -->
     <script type="text/javascript" src="js/display.js"></script>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    
+
     <title>Movies</title>
 
     <!-- Bootstrap Core CSS -->
@@ -40,11 +43,11 @@
         <div class="page-header">
             <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo site -->
             <p class="welcome">WELCOME !</p>
-            <p></br> 
+            <p></br>
                </p>
         </div><!-- /.page-header -->
     </div><!-- /.header -->
-        
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -57,7 +60,7 @@
                     <span class="icon-bar"></span>
                 </button>
             </div><!-- /.navbar-header -->
-            <!-- Collect the nav links, forms, and other content for toggling --> 
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
@@ -72,7 +75,10 @@
     </nav>
 
 <?php
-
+	$movies = getInfoMovies($connect, array('idMovies' => array($_GET['id'], '=')));
+	echo "<pre>";
+	print_r($movies);
+	echo "</pre>";
 	$movies = $connect->query("SELECT * FROM movies WHERE idMovies = ".$_GET['id']."");
 		foreach($movies as $row)
 		{

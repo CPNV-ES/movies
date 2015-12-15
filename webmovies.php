@@ -1,6 +1,7 @@
 <?php
-
-    require_once("php/functions/lib_db_connect.php");
+	require_once("php/configs/project_root.php");
+	require_once(ROOT_PATH.'php/configs/configs.php');
+	require_once(ROOT_PATH."php/functions/lib_db_connect.php");
 
     $connect= connectDB();//Connect the object "connectDB"
 
@@ -43,12 +44,12 @@
         <div class="page-header">
             <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo site -->
             <p class="welcome">WELCOME !</p>
-            <p>Here you can see the movies taked from an application that</br> 
+            <p>Here you can see the movies taked from an application that</br>
                shows you some details about your films selected before</p>
             <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies" href><!-- button "Display movies" -->
         </div><!-- /.page-header -->
     </div><!-- /.header -->
-        
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -61,7 +62,7 @@
                     <span class="icon-bar"></span>
                 </button>
             </div><!-- /.navbar-header -->
-            <!-- Collect the nav links, forms, and other content for toggling --> 
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
@@ -74,9 +75,9 @@
                 <!--
                 <div id="overlay"><a href="#nowehere">Exit</a></div>
                 <a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                 do a opening window for the options 
+                 do a opening window for the options
                     <a href="php/pages/options.php" onclick="window.open('','popup','width=auto, height=200, top=auto, left=auto, toolbar=0, location=0, directories=0, status=0, menubar=0, scrollbars=0, resizable=1')" target="popup"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                --> 
+                -->
               </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
@@ -94,11 +95,11 @@
 
         <?php
             echo '<div id=search>';
-                    include_once("php/pages/search_web.php");//Include the function search
+                    include_once(ROOT_PATH."php/pages/search_web.php");//Include the function search
             echo '</div>';
 
             echo '<div id=1 style=display:none;>';
-                    include_once("php/pages/display_movies_web.php");//Include the function display
+                    include_once(ROOT_PATH."php/pages/display_movies_web.php");//Include the function display
             echo '</div>';
         ?>
 

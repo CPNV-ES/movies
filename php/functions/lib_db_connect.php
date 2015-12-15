@@ -1,8 +1,5 @@
 <?php
-
-
-require_once(ROOT_PATH."php/configs/config.php");
-
+require_once(ROOT_PATH."php/configs/configs.php");
 
 /* Function connectDB
 	Retourne l'object PDO connecter à la base de donnée

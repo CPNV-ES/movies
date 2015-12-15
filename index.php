@@ -1,5 +1,6 @@
 <?php
 	require_once("php/configs/project_root.php");
+	require_once(ROOT_PATH.'php/configs/configs.php');
     require_once(ROOT_PATH."php/functions/lib_db_connect.php");
 
     $connect= connectDB();//Connect the object "connectDB"
