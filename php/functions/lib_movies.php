@@ -11,13 +11,22 @@
     require_once("../configs/config.php");
     require_once("lib_db_movies.php");
 
-    /*//data test
+    //data test
     $var = array();
     $var[] = array('1', "lucy");
     $var[] = array('2', "iron man");
     $var[] = array('3', "les 4 fantastiques");
-    $var[] = array('4', "lord of war");
-*/
+    $var[] = array('4', "Les évadés");
+    $var[] = array('4', "Le parrain");
+    $var[] = array('4', "Pulp Fiction");
+    $var[] = array('4', "Fight Club");
+    $var[] = array('4', "Matrix");
+    $var[] = array('4', "Les sept samouraïs");
+    $var[] = array('4', "American History X");
+    $var[] = array('4', "Retour vers le futur");
+    $var[] = array('4', "Alien - Le 8ème passager");
+    $var[] = array('4', "Témoin à charge");
+
 
     function connect_tmdb()//fonction ok
     {
@@ -88,8 +97,14 @@
                 }
 
                 // ci dessous je vais inserer les acteurs du film, mais pas tous, je prend que les 10 principaux
-                $id_role = getrollebyid("Acteur", $pdo);
-                for ($i=0; $i < 10; $i++)
+                $nbcast = 10;
+                if (count(get_object_vars($Full_Info["casts"])["cast"])<10)
+                {
+                    $nbcast = count(get_object_vars($Full_Info["casts"])["cast"]);
+                }
+
+                $id_role = getrollebyid("Actor", $pdo);
+                for ($i=0; $i < $nbcast; $i++)
                 {
                     if(($idPeople = getidPeople(get_object_vars(get_object_vars($Full_Info["casts"])["cast"][$i])["name"], $pdo)) === false)
                     {
@@ -168,5 +183,5 @@
 
         return(get_object_vars(json_decode($Full_Info)));
     }
-    //Word($var);
+    recoverInfoMovies($var);
 ?>

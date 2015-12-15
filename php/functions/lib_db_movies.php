@@ -90,7 +90,7 @@
      * @param int    $id_movie_db  Contains id movie of last insert
      * @param ObjectPdo $pdo      Contains object connection data base
      *
-     * @return 
+     * @return
     */
     function insert_genres_Movie($id_genres, $id_movie_db, $pdo)//fonction ok
     {
