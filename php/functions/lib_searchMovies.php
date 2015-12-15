@@ -1,44 +1,26 @@
 <?php
 
-/* Function getAllFilm
-	Return id and title of all film found in the db
-	Param :
-		- db : connector PDO of the db
-	Return : Success = array of film, Echec = False	*/
-function getAllFilm($db){
-	$query  = 'SELECT movies.`idMovies`, movies.`Title`, files.`idFiles` FROM movies ';
-	$query .= 'INNER JOIN files ON files.`fkMovies` = movies.`idMovies` ';
-	$query .= 'GROUP BY `movies.`idMovies';
-
-    $req = $db->prepare($query);
-
-    if(!$req->execute()){
-        $error = $req->errorCode();
-        $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
-		//echo $error;
-        return false;
-    }
-
-    if($req->rowCount() >= 1){
-        $result = $req->fetchAll();
-        return $result;
-    }
-    return false;
-}
-
-/* Function getFilmByTitle
+/* Function getMovies
 	Return all movies when the string match on the title
 	Param :
 		- db : connector PDO of the db
-		- search_string : string for matching on title
+		- search_string : string for matching on title, if it's homited, the function get all movies
 	Return : Success = array of movies found, Echec = False	*/
-function getFilmByTitle($db, $search_string){
-	$query  = 'SELECT movies.`idMovies`, movies.`Title` FROM movies ';
-    $query .= 'WHERE movies.`Title` LIKE ?';
+function getMovies($db, $search_string = null){
+	$query  = 'SELECT movies.`idMovies`, movies.`Title`, files.`idFiles` FROM movies ';
+	$query .= 'INNER JOIN files ON files.`fkMovies` = movies.`idMovies` ';
 
-    $req = $db->prepare($query);
-	$search_string = '%'.$search_string.'%';
-    $req->bindParam(1, $search_string);
+	if($search_string !== null){
+    	$query .= 'WHERE movies.`Title` LIKE ? ';
+	}
+
+	$query .= 'GROUP BY movies.`idMovies`';
+
+  $req = $db->prepare($query);
+	if($search_string !== null){
+		$search_string = '%'.$search_string.'%';
+		$req->bindParam(1, $search_string);
+	}
 
     if(!$req->execute()){
         $error = $req->errorCode();
@@ -49,7 +31,6 @@ function getFilmByTitle($db, $search_string){
 
     if($req->rowCount() >= 1){
         $result = $req->fetchAll();
-		var_dump($result);
         return $result;
     }
 
@@ -64,7 +45,7 @@ function getFilmByTitle($db, $search_string){
 	Return : Success = array of Genres, Echec = False	*/
 function getGenres($db, $id){
 	$query  = 'SELECT genres.`Name` FROM movies ';
-    $query .= 'INNER JOIN genres_movies ON genres_movies.`fkMovies` = movies.`idMovies` ';
+  $query .= 'INNER JOIN genres_movies ON genres_movies.`fkMovies` = movies.`idMovies` ';
 	$query .= 'INNER JOIN genres ON genres.`idGenres` = genres_movies.`fkGenres` ';
 	$query .= 'WHERE movies.`idMovies` = ?';
 
@@ -94,7 +75,7 @@ function getGenres($db, $id){
 	Return : Success = array of Genres, Echec = False	*/
 function getCountries($db, $id){
 	$query  = 'SELECT countries.`Name` FROM movies ';
-    $query .= 'INNER JOIN countries_movies ON countries_movies.`fkMovies` = movies.`idMovies` ';
+  $query .= 'INNER JOIN countries_movies ON countries_movies.`fkMovies` = movies.`idMovies` ';
 	$query .= 'INNER JOIN countries ON countries.`idCountries` = countries_movies.`fkCountries` ';
 	$query .= 'WHERE movies.`idMovies` = ?';
 
@@ -125,7 +106,7 @@ function getCountries($db, $id){
 	Return : Success = array of People, Echec = False	*/
 function getPeople($db, $id, $type){
 	$query  = 'SELECT people.`FirstName`,people.`LastName` FROM movies ';
-    $query .= 'INNER JOIN people_movies ON people_movies.`fkMovies` = movies.`idMovies` ';
+  $query .= 'INNER JOIN people_movies ON people_movies.`fkMovies` = movies.`idMovies` ';
 	$query .= 'INNER JOIN types_role ON types_role.`idTypes_role` = people_movies.`fkTypes_Role` ';
 	$query .= 'INNER JOIN people ON people.`idPeople` = people_movies.`fkPeople` ';
 	$query .= 'WHERE movies.`idMovies` = ? ';
@@ -158,7 +139,7 @@ function getPeople($db, $id, $type){
 	Return : Success = array of Studios, Echec = False	*/
 function getStudios($db, $id){
 	$query  = 'SELECT people.`FirstName`,people.`LastName` FROM movies ';
-    $query .= 'INNER JOIN studios_movies ON studios_movies.`fkMovies` = movies.`idMovies` ';
+  $query .= 'INNER JOIN studios_movies ON studios_movies.`fkMovies` = movies.`idMovies` ';
 	$query .= 'INNER JOIN studios ON studios.`idStudios` = studios_movies.`fkStudios` ';
 	$query .= 'WHERE movies.`idMovies` = ?';
 
@@ -198,16 +179,20 @@ function getStudios($db, $id){
 			)
 		);
 	*/
-function getInfoFilm($db, $attr = array()){
+function getInfoMovies($db, $attr = array()){
 	$query  = 'SELECT * FROM movies ';
+	$query .= 'INNER JOIN files ON files.`fkMovies` = movies.`idMovies` ';
+
 	$first = true;
 	foreach($attr as $key => $value){
 		$sign = $value[1];
 		if($first){
 			$first = false;
-			$query .= "WHERE movies.$key $sign ${value[0]} ";
+			$query .= "WHERE movies.$key $sign '${value[0]}' ";
 		}
-		$query .= "AND movies.$key $sign ${value[0]} ";
+		else{
+			$query .= "AND movies.$key $sign '${value[0]}' ";
+		}
 	}
 
     $req = $db->prepare($query);
@@ -222,6 +207,9 @@ function getInfoFilm($db, $attr = array()){
     if($req->rowCount() >= 1){
         $result = $req->fetchAll();
     }
+	else{
+		return false;
+	}
 
 	for($i = 0, $size = count($result); $i < $size; $i++){
 		$id = $result[$i]["idMovies"];
