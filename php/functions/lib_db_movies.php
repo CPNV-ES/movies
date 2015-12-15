@@ -10,7 +10,7 @@ require_once(ROOT_PATH."php/configs/configs.php");
 // Sortie:
 //      - true   -> si le film et déja dans la bdd
 //      - False  -> si le film n'y est pas
-function verif_movie($FullInfo, $pdo)
+function checkMovie($FullInfo, $pdo)
 {
     $req = $pdo->prepare('SELECT * FROM `movies` WHERE Title = ?');
     $req->bindParam(1, $FullInfo["original_title"]);
@@ -24,7 +24,26 @@ function verif_movie($FullInfo, $pdo)
     return false;
 }
 
-function Insert_Movie($movie, $pdo)//fonction ok
+function getIdMovie($title, $pdo)
+{
+    $req = $pdo->prepare('SELECT * FROM `movies` WHERE Title = ?');
+    $req->bindParam(1, $title);
+    $req->execute();
+    $result = $req->fetchAll();
+
+    if ($req->rowCount() > 0)
+    {
+        return $result[0]["idMovies"];
+    }
+    return;
+}
+
+
+
+
+
+
+function inserMovies($movie, $pdo)//fonction ok
 {
     $req = $pdo->prepare('INSERT INTO `movies` (Title, Year, Length, Description, Poster) VALUE (?, ?, ?, ?, ?)');
     $req->bindParam(1, $movie["original_title"]);
@@ -51,7 +70,7 @@ function getidGenre($genre, $pdo)//fonction ok
     return false;
 }
 
-function Insert_Genre($genre, $pdo)//fonction ok
+function insertGenre($genre, $pdo)//fonction ok
 {
     $req = $pdo->prepare('INSERT INTO `genres` (Name) VALUES (?)');
     $req->bindParam(1, $genre);
@@ -70,7 +89,11 @@ function insert_genres_Movie($id_genres, $id_movie_db, $pdo)//fonction ok
 
 function Update_files($id_movie, $id_files, $pdo)// fonction ok
 {
-    $req = $pdo->prepare('UPDATE `files` SET fkMovie = ? WHERE idFiles = ?');
+    //echo "id movie : ".$id_movie."<br>";
+    //echo "id files : ".$id_files."<br>";
+
+
+    $req = $pdo->prepare('UPDATE `files` SET fkMovies = ? WHERE idFiles = ?');
     $req->bindParam(1, $id_movie);
     $req->bindParam(2, $id_files);
     $req->execute();
@@ -127,7 +150,7 @@ function getidPeople($people, $pdo)
     $data = explode(" ", $people);
     $req = $pdo->prepare('SELECT * FROM `people` WHERE FirstName = ? AND LastName = ?');
     $req->bindParam(1, $data[0]);
-    $lastname = $data[1].@$data[2];
+    $lastname = @$data[1].@$data[2];
     $req->bindParam(2, $lastname);
     $req->execute();
     $result = $req->fetchAll();
@@ -143,7 +166,7 @@ function insert_people($people, $pdo)
     $data = explode(" ", $people);
     $req = $pdo->prepare('INSERT INTO `people` (FirstName, LastName) VALUES (?, ?)');
     $req->bindParam(1, $data[0]);
-    $lastname = $data[1].@$data[2];
+    $lastname = @$data[1].@$data[2];
     $req->bindParam(2, $lastname);
     $req->execute();
     return($pdo->lastInsertId());

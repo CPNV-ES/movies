@@ -1,7 +1,8 @@
 <?php
-require_once("../configs/config.php");
-require_once("./lib_db_files.php");
-require_once("./lib_db_connect.php");
+//require_once("../configs/project_root.php");
+require_once(ROOT_PATH."php/configs/configs.php");
+require_once(ROOT_PATH."php/functions/lib_db_files.php");
+require_once(ROOT_PATH."php/functions/lib_db_connect.php");
 
 /* Function getInfoFilm
 	Permet de recuperer les informations du film dans les variabls title & type
