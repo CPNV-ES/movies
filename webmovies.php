@@ -86,8 +86,9 @@
 
         <div class="search">
             <form action="webmovies.php" method="post">
-                <input type="text" name="requete" size="30" placeholder="recherche">
-                <input type="submit" value="Ok">
+                <input type="text" name="requete" size="30" placeholder="Name of film">
+                <button>Filter</button>
+                <input type="submit" value="Search">
             </form>
         </div><!-- /.search -->
 
