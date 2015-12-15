@@ -45,7 +45,7 @@
     <div class="header">
         <div class="page-header">
             <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo site -->
-            <p class="welcome">WELCOME !</p>
+            <p class="welcome">LIST OF MOVIES TAKED FROM THE WEB !</p>
             <p>Here you can see the movies taked from an application that</br>
                shows you some details about your films selected before</p>
             <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies" href><!-- button "Display movies" -->

@@ -42,8 +42,8 @@
     <div class="header">
         <div class="page-header">
             <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo site -->
-            <p class="welcome">WELCOME !</p>
-            <p></br>
+            <p class="welcome">INFORMATIONS OF YOUR MOVIE !</p>
+            <p>You can click on "Web movies" to return to the list of the movies taked from the web.</br>
                </p>
         </div><!-- /.page-header -->
     </div><!-- /.header -->
@@ -73,9 +73,118 @@
               </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
- 			
+			
 <div class="infos-block">   		
     <div class="infos-text-block">  
+<?php
+
+	$movies = getInfoMovies($connect, array('idMovies' => array($_GET['id'], '=')));
+    $movies = $movies[0];
+	
+    /*
+        -- Test pour voir l'affichage des données sous forme de tableau --
+        echo "<pre>";
+	    print_r($movies);
+	    echo "</pre>";
+    */
+
+    echo '<h2>'.$movies['Title'].'</h2><br>';
+    echo 'Date de sortie: '.$movies['Year'].'';
+    
+    if($movies['genres'] !== false)
+    {
+        echo '<br>Genres: ';
+        foreach($movies['genres'] as $genres)
+    	{			
+            echo $genres['Name'].' / ';
+        }
+    }
+    else
+    {
+        echo '<br>Genres: Aucun genres trouvés dans la base de données';
+    }
+
+    if($movies['director'] !== false)
+    {
+        echo '<br>Réalisateurs: ';
+        foreach($movies['director'] as $director)
+        {           
+            echo $director['FirstName'].' '.$director['LastName'].' / ';
+        }
+    }
+    else
+    {
+        echo '<br>Réalisateurs: Aucun réalisateurs trouvés dans la base de données';
+    }
+
+    if($movies['actor'] !== false)
+    {
+        echo '<br>Acteurs principaux: ';
+        foreach($movies['actor'] as $actor)
+        {           
+            echo $actor['FirstName'].' '.$actor['LastName'].' / ';
+        }
+    }
+    else
+    {
+        echo '<br>Acteurs principaux: Aucun acteurs trouvés dans la base de données';
+    }
+
+    if($movies['studios'] !== false)
+    {
+        echo '<br>Studios de productions: ';
+        foreach($movies['studios'] as $studios)
+        {           
+            echo $studios['Name'].' / ';
+        }
+    }
+    else
+    {
+        echo '<br>Studios de productions: Aucun studios de productions trouvés dans la base de données';
+    }
+
+    if($movies['countries'] !== false)
+    {
+        echo '<br>Pays de productions: ';
+        foreach($movies['countries'] as $countries)
+        {           
+            echo $countries['Name'].' / ';
+        }
+    }
+    else
+    {
+        echo '<br>Pays de productions: Aucun pays de productions trouvés dans la base de données';
+    }
+
+    if($movies['writer'] !== false)
+    {
+        echo '<br>Scénaristes: ';
+        foreach($movies['writer'] as $writer)
+        {           
+            echo $writer['FirstName'].' '.$writer['LastName'].' / ';
+        }
+    }
+    else
+    {
+        echo '<br>Scénaristes: Aucun scénaristes trouvés dans la base de données';
+    }
+
+    if($movies['producer'] !== false)
+    {
+        echo '<br>Producteurs: ';
+        foreach($movies['producer'] as $producer)
+        {           
+            echo $producer['FirstName'].' '.$producer['LastName'].' / ';
+        }
+    }
+    else
+    {
+        echo '<br>Producteurs: Aucun producteurs trouvés dans la base de données';
+    }
+
+    echo '<br>Description: '.$movies['Description'].' min';
+    
+?>
     
     </div> 
 </div>  

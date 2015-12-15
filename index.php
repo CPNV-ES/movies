@@ -89,7 +89,6 @@
                         
                         <input type="button" id="refresh" onClick="javascript:window.location.reload()" class="btn" value="Refresh"><!-- button to reload the page -->
 
-
                     </div><!-- /.popup-block -->
                 </div><!-- /.overplay -->
             	<p><a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
