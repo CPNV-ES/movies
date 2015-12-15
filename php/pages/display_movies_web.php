@@ -5,6 +5,7 @@
 	$movies = getInfoMovies($connect);
 
 	if($movies !== false){
+<<<<<<< HEAD
 	  foreach($movies as $row)
 	  {
 		?>
@@ -29,10 +30,27 @@
 		 		</div>
 		 	</div>
 	<?php
+=======
+		foreach($movies as $row)
+		{
+?>
+			<form action="<?php echo $_SERVER["PHP_SELF"];?>" method="get">
+				<div class="col-md-6 portfolio-item">
+				 	<div class="thumbnail">
+				 		<b><?php echo 'Titre: '.$row['Title'].''; ?></b><br>
+				 		<?php echo 'Année: '.$row['Year'].''; ?><br>
+				 		<?php echo 'Durée: '.$row['Length'].' min'; ?><br>
+	            		<p><a href="more_informations.php?id=<?php echo $row["idMovies"];?>" class="btn">Plus d'infos</a></p>
+				 	</div><!-- /.thumbnail -->
+				 </div><!-- /.portfolio-item -->
+			 </form>
+<?php
+>>>>>>> 0545f393c9d4b5ced898e5b7e5326a28f05e3cb2
 		}
 	}
-	else{
-		?>
+	else
+	{
+?>
 		<div class="col-md-3 portfolio-item">
 				<div class="thumbnail">
 					Pas de résultats

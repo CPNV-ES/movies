@@ -1,7 +1,9 @@
 <?php
+
     require_once("php/functions/lib_db_connect.php");
 
     $connect= connectDB();//Connect the object "connectDB"
+
 ?>
 
 <!DOCTYPE html>
@@ -40,7 +42,6 @@
     <div class="header">
         <div class="page-header">
             <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo site -->
-            
             <p class="welcome">WELCOME !</p>
             <p>Here you can see the movies taked from an application that</br> 
                shows you some details about your films selected before</p>
@@ -85,8 +86,9 @@
 
         <div class="search">
             <form action="webmovies.php" method="post">
-                <input type="text" name="requete" size="30" placeholder="recherche">
-                <input type="submit" value="Ok">
+                <input type="text" name="requete" size="30" placeholder="Name of film">
+                <button>Filter</button>
+                <input type="submit" value="Search">
             </form>
         </div><!-- /.search -->
 

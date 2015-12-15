@@ -97,8 +97,8 @@
 
         <div class="search">
             <form action="index.php" method="post">
-                <input type="text" name="requete" size="30" placeholder="recherche">
-                <input type="submit" value="Ok">
+                <input type="text" name="requete" size="30" placeholder="Name of film">
+                <input type="submit" value="Search">
             </form>
         </div><!-- /.search -->
 
