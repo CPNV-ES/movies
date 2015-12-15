@@ -1,4 +1,6 @@
 <?php
+require_once(ROOT_PATH."php/configs/config.php");
+
 /* Function getSourceId
 	Recupére l'id en base de donnée de la source demandé
 	Param :
