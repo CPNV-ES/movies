@@ -1,6 +1,6 @@
 <?php
-
-    require_once("php/functions/lib_db_connect.php");
+	require_once("php/configs/project_root.php");
+    require_once(ROOT_PATH."php/functions/lib_db_connect.php");
 
     $connect= connectDB();//Connect the object "connectDB"
 
@@ -12,14 +12,14 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- Display movies in the DB -->
     <script type="text/javascript" src="js/display.js"></script>
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-    
+
     <title>Movies</title>
 
     <!-- Bootstrap Core CSS -->
@@ -43,12 +43,12 @@
         <div class="page-header">
             <img class="logo" src="css/imgs/logo_mini_blanc.png"/><!-- logo site -->
             <p class="welcome">WELCOME !</p>
-            <p>You want to see the movies that you have in your datas ?</br> 
+            <p>You want to see the movies that you have in your datas ?</br>
                Then, click right bellow and you will see them</p>
             <input type="button" id="display" OnClick="display('1'); return false;" class="btn" value="Display movies"><!-- button "Display movies" -->
         </div><!-- /.page-header -->
     </div><!-- /.header -->
-        
+
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
@@ -61,7 +61,7 @@
                     <span class="icon-bar"></span>
                 </button>
             </div><!-- /.navbar-header -->
-            <!-- Collect the nav links, forms, and other content for toggling --> 
+            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
@@ -75,19 +75,19 @@
                     <div class="popup-block">
                         <a class="close" href=><img alt="Fermer" title="Fermer la fenêtre" class="btn-close" src="css/imgs/exit.png"></a>
                         <h2>Popup</h2>
-                        
+
                         <p>Choose your options and give the link file of your movies.</p><br>
                         <input type="button" id="reload" onClick="javascript:window.location.reload()" class="btn" value="Reload"><!-- button to reload the page -->
-                    
+
                     </div><!-- /.popup-block -->
                 </div><!-- /.overplay -->
             	<p><a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
                 <!--
             	<div id="overlay"><a href="#nowehere">Exit</a></div>
                 <a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                 do a opening window for the options 
+                 do a opening window for the options
                 	<a href="php/pages/options.php" onclick="window.open('','popup','width=auto, height=200, top=auto, left=auto, toolbar=0, location=0, directories=0, status=0, menubar=0, scrollbars=0, resizable=1')" target="popup"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                --> 
+                -->
               </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
@@ -104,11 +104,11 @@
 
         <?php
             echo '<div id=search>';
-                    include_once("php/pages/search_record.php");//Include the function search
+                    include_once(ROOT_PATH."php/pages/search_record.php");//Include the function search
             echo '</div>';
 
             echo '<div id=1 style=display:none;>';
-                    include_once("php/pages/display_movies_record.php");//Include the function display
+                    include_once(ROOT_PATH."php/pages/display_movies_record.php");//Include the function display
             echo '</div>';
         ?>
 

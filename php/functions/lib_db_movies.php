@@ -1,5 +1,5 @@
 <?php
-require_once("../configs/config.php");
+require_once(ROOT_PATH."php/configs/config.php");
 
 
 // verif_movies:
