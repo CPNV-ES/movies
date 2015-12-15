@@ -1,5 +1,4 @@
 <?php
-	require_once(ROOT_PATH."php/configs/configs.php");
 	require_once(ROOT_PATH.'php/functions/lib_searchMovies.php');
 
     if(isset($_POST['requete']) && $_POST['requete'] != NULL)

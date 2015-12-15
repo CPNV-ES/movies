@@ -1,5 +1,6 @@
 <?php
-require_once(ROOT_PATH."php/configs/config.php");
+require_once(ROOT_PATH."php/configs/configs.php");
+
 /* Function getMovies
 	Return all movies when the string match on the title
 	Param :

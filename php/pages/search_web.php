@@ -1,4 +1,5 @@
 <?php
+
   require_once(ROOT_PATH."php/configs/configs.php");
   require_once(ROOT_PATH.'php/functions/lib_searchMovies.php');
 
@@ -39,4 +40,3 @@
 <?php
   	}
   }
-
