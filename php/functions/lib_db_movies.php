@@ -1,5 +1,5 @@
 <?php
-require_once("../configs/config.php");
+require_once(ROOT_PATH."php/configs/configs.php");
 
 
 // verif_movies:
@@ -190,5 +190,5 @@ function insert_studios_Movie($idStudios, $id_movie_db, $pdo)
     $req->execute();
     return;
 }
-
  ?>
+
