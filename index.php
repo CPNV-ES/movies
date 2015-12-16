@@ -114,11 +114,11 @@
 
         <?php
             echo '<div id=search>';
-                    include_once(ROOT_PATH."php/pages/search_record.php");//Include the function search
+                    include_once(ROOT_PATH."php/pages/search_record.php");//Include the page for the search movies
             echo '</div>';
 
             echo '<div id=1 style=display:none;>';
-                    include_once(ROOT_PATH."php/pages/display_movies_record.php");//Include the function display
+                    include_once(ROOT_PATH."php/pages/display_movies_record.php");//Include the page for the display movies
             echo '</div>';
         ?>
 

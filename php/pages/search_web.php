@@ -14,6 +14,10 @@
     $attr = array(); //filtre sur la table movies
     $filter = array();//filtre sur le reste
 
+    /*
+      This condition checks if the value of the field's name of the inupt matches the valeurs in th database
+    */ 
+
     if(isset($_POST['namefilm']) && $_POST['namefilm'] != NULL)
     {
       $namefilm = htmlspecialchars($_POST['namefilm']);
@@ -70,8 +74,13 @@
 
       $movies = getInfoMovies($connect, $attr, $filter);
 
-      //print_r($movies);
+      /*
+        This display the value in the array of the variable $movies
 
+          print_r($movies);
+      */
+
+      /* Verify if the variable $movies is not empty */
       if(!empty($movies))
       {
     		foreach($movies as $row)

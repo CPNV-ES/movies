@@ -11,7 +11,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Display movies in the DB -->
@@ -97,19 +96,19 @@
                 <input type="text" name="nameactor" size="15" placeholder="Name of actor"><br><br>
                 <input type="text" name="studio" size="15" placeholder="Studio">
                 <input type="text" name="country" size="15" placeholder="Country">
-                <input type="text" name="writer" size="15" placeholder="Writer">
-                <input type="text" name="producer" size="15" placeholder="Producer">
+                <input type="text" name="writer" size="15" placeholder="Name of writer">
+                <input type="text" name="producer" size="15" placeholder="name of producer">
                 <input type="submit" value="Search">
             </form>
         </div><!-- /.search -->
 
         <?php
             echo '<div id=search>';
-                    include_once(ROOT_PATH."php/pages/search_web.php");//Include the function search
+                    include_once(ROOT_PATH."php/pages/search_web.php");//Include the page for the search movies
             echo '</div>';
 
             echo '<div id=1 style=display:none;>';
-                    include_once(ROOT_PATH."php/pages/display_movies_web.php");//Include the function display
+                    include_once(ROOT_PATH."php/pages/display_movies_web.php");//Include the page for the display movies
             echo '</div>';
         ?>
 
