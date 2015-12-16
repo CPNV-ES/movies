@@ -73,7 +73,7 @@
               </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
-			
+
 <?php
 
 	$movies = getInfoMovies($connect, array('idMovies' => array($_GET['id'], '=')));
@@ -92,6 +92,7 @@
    	echo '</div>';
    
     echo '<div class="infos-text-block">';  // div for the informations
+
     echo '<h2>'.$movies['Title'].'</h2><br>';
     echo '<b>Date de sortie: </b>'.$movies['Year'].'';
     
@@ -113,7 +114,7 @@
         echo '<br><b>Réalisateurs: </b>';
         foreach($movies['director'] as $director)
         {           
-            echo $director['FirstName'].' '.$director['LastName'].' / ';
+            echo $director['FullName'].' / ';
         }
     }
     else
@@ -126,7 +127,7 @@
         echo '<br><b>Acteurs principaux: </b>';
         foreach($movies['actor'] as $actor)
         {           
-            echo $actor['FirstName'].' '.$actor['LastName'].' / ';
+            echo $actor['FullName'].' / ';
         }
     }
     else
@@ -165,7 +166,7 @@
         echo '<br><b>Scénaristes: </b>';
         foreach($movies['writer'] as $writer)
         {           
-            echo $writer['FirstName'].' '.$writer['LastName'].' / ';
+            echo $writer['FullName'].' / ';
         }
     }
     else
@@ -178,7 +179,7 @@
         echo '<br><b>Producteurs: </b> ';
         foreach($movies['producer'] as $producer)
         {           
-            echo $producer['FirstName'].' '.$producer['LastName'].' / ';
+            echo $producer['FullName'].' / ';
         }
     }
     else
@@ -193,6 +194,7 @@
 	echo '</div>';
 ?>
     
+
 </body>
 
 </html>

@@ -3,16 +3,17 @@
     Autor       : Alain Pichonnat
     mail        : alain.pichonnat@cpnv.ch
     Date        : 09.12.2015
-    Description : go to research datas movies in themoviedb(db web)and insert datas in the database.
+    Description : go to research data movies in themoviedb(db web)and insert datas in the database.
 
 */
-    require_once("../../tmdb/tmdb-api.php");
-    require_once("lib_db_connect.php");
-    require_once("../configs/config.php");
-    require_once("lib_db_movies.php");
+    require_once("../configs/project_root.php");
+    require_once(ROOT_PATH."php/configs/configs.php");
+    require_once(ROOT_PATH."php/functions/lib_db_connect.php");
+    require_once(ROOT_PATH."tmdb/tmdb-api.php");
+    require_once(ROOT_PATH."php/functions/lib_db_movies.php");
 
     //data test
-    $var = array();
+   /* $var = array();
     $var[] = array('1', "lucy");
     $var[] = array('2', "iron man");
     $var[] = array('3', "les 4 fantastiques");
@@ -27,27 +28,22 @@
     $var[] = array('4', "Alien - Le 8ème passager");
     $var[] = array('4', "Témoin à charge");
 
+*/
 
-    function connect_tmdb()//fonction ok
+    function recoverInfoMovies($var)
     {
         $id_movie_tmbd = array();
         $key = "3258bf1b52c98a7b40e373ad5a43521e";
-    	$lang = "fr";
-    	$tmdb = new tmdb($key, $lang);
-        return $tmdb;
-    }
+        $lang = "fr";
+        $tmdb = new tmdb($key, $lang);
 
-    // =============================================================================
-    //
-    // =============================================================================
-    function recoverInfoMovies($var)
-    {
+
         $pdo = connectDB();
         foreach ($var as $data)
         {
 
             // Recherche de l'id du film dans theMovieDB
-            $id_movies_tmdb = Search_id_movie($data[FILES_TITLE]);
+            $id_movies_tmdb = Search_id_movie($data[FILES_TITLE], $tmdb);
 
             // Si l'id du film n'est pas trouvé dans theMovieDb alor on continue
             if ($id_movies_tmdb === false)
@@ -56,7 +52,7 @@
                 continue;
             }
             // on va rechercher toutes les informations dans TheMovieDb
-            $Full_Info = Search_info_movie($id_movies_tmdb);
+            $Full_Info = Search_info_movie($id_movies_tmdb, $tmdb);
 
             if($Full_Info === false)
             {
@@ -114,35 +110,36 @@
                 }
 
                 // insert crew, director, writer and producer.
-                foreach(get_object_vars($Full_Info["casts"])["crew"] as $data)
+                foreach(get_object_vars($Full_Info["casts"])["crew"] as $crew)
                 {
-                    $data = get_object_vars($data);
+                    $crew = get_object_vars($crew);
 
-                    switch ($data["job"])
+                    switch ($crew["job"])
                     {
                         case 'Producer':
                         case 'Director':
                         case 'Writer':
-                            if ($id_crew = getidPeople($data["name"], $pdo) === false)
+                            if ($id_crew = getidPeople($crew["name"], $pdo) === false)
                             {
-                                $id_crew = insert_people($data["name"], $pdo);
+                                $id_crew = insert_people($crew["name"], $pdo);
                             }
 
-                            $id_role = getrollebyid($data["job"], $pdo);
+                            $id_role = getrollebyid($crew["job"], $pdo);
 
                             insert_people_role_movies($id_crew, $id_role, $id_movie_db, $pdo);
                         break;
                     }
                 }
-
-
+            }
+            else
+            {
+                $id_movie_db = getIdMovie($Full_Info["original_title"], $pdo);
             }
 
             // On update dans la table files le fkmovie pour correspondre à ce que jonathan à inseré
-            if (isset($data[FILES_ID]) && isset($id_movie_db))
-            {
+
                 Update_files($id_movie_db, $data[FILES_ID], $pdo);
-            }
+
 
             //var_dump($id_movie_db);
             //var_dump($Full_Info);
@@ -158,30 +155,58 @@
     // Sortie:
     //      - false  -> si aucun film n'a été trouvé.
     //      - id     -> si le film à été trouvé
-    function Search_id_movie ($var) //fonction ok
+    function Search_id_movie ($var, $tmdb) //fonction ok
     {
-        $tmdb = connect_tmdb();
         $var = str_replace(" ", "+", $var);
-        $idmovie = $tmdb->searchMovie($var);
+        $count = 0;
+        do
+        {
+            if ($count > 3)
+            {
+                return false;
+            }
 
-        if(empty($idmovie)) return false;
-        //ici je mais la valu 0 pour ne prendre que le première id car themoviedb peut en trouver plusieur
+            if(isset($idmovie))
+            {
+                sleep(4);
+            }
+
+            $idmovie = $tmdb->searchMovie($var);
+            $count++;
+        }
+        while (empty($idmovie));
+        
         return $idmovie[0]->GetID();
     }
 
-    function Search_info_movie($id_tmdb) //fonction ok
+    function Search_info_movie($id_tmdb, $tmdb) //fonction ok
     {
-        $tmdb = connect_tmdb();
 
-        if ($id_tmdb == null)return "Not Find Info";
+        if ($id_tmdb == null)return false;
+        if(empty($id_tmdb)) return false;
 
-        $data = $tmdb->getMovie($id_tmdb);
+        $count = 0;
+        do
+        {
+            if ($count > 6)
+            {
+                return false;
+            }
+
+            if(isset($data))
+            {
+
+                sleep(2);
+            }
+
+            $data = $tmdb->getMovie($id_tmdb);
+            $count++;
+        }
+        while(empty($data));
 
         $Full_Info = $data->GetJSON();
 
-        if(empty($id_tmdb)) return false;
-
         return(get_object_vars(json_decode($Full_Info)));
     }
-    recoverInfoMovies($var);
+
 ?>

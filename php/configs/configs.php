@@ -16,7 +16,7 @@
 	define('DB_DIRECTOR_TYPE', 'Director');
 	define('DB_PRODUCER_TYPE', 'Procuder');
 
-	//Constant for lib_final.php
+	//Constant for lib_movies.php
 	define("FILES_ID", 0);
     define("FILES_TITLE", 1);
  ?>
