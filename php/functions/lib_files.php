@@ -79,62 +79,12 @@ function listFile(&$result, $path){
 			continue;
 		}
 	
-		return false;
+		
 	}
+	return false;
+}
+
 	
-	/* Function getDir
-		Permet de recuperer le pointeur sur le dossier voulu
-		Param :
-			- link : Conteneur du pointeur du fichier (Rempli à l'execution)
-			- path : Chaine de caractère contenant le chemin vers le dossier
-		Return : En succes = True, Echéc = False	*/
-	function getDir(&$link, $path){
-		if($link !== null)
-			return true;
-	
-		$link = opendir($path);
-		if($link === false){
-			$error = "Unable to open $path";
-			// echo $error;
-			return false;
-		}
-	
-		return true;
-	}
-	
-	/* Function listFile
-		list la totalité des fichiers présents dans un dossier
-		Param :
-			- result : tableau récupérant la totalité des fichiers présents dans le dossier source (fonction récursive)
-			- path : Chaine de caractère contenant le chemin vers le dossier à scan
-		Return : En succes = True, Echéc = False	*/
-	function listFile(&$result, $path){
-		if(!getDir($link, $path)){
-			return false;
-		}
-	
-		while (($entry = readdir($link)) !== false)
-		{
-			if($entry == "." || $entry == "..")
-				continue;
-	
-			if(is_dir($path . '/' . $entry)){
-				// recherche des fichiers dans le sous-dossier suivant
-				listFile($result, $path . '/' . $entry);
-			}
-			else{
-				if(is_file($path .'/' . $entry)){
-	
-					if(preg_match('/.*\.avi$/', $entry)){
-						$result[] = array($path . '/', $entry);
-					}
-				}
-				continue;
-			}
-		}
-	
-		return true;
-	}
 	
 	/* Function getFilms
 		Renvoie la totalité des films trouver si leur nom a été parse

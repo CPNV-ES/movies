@@ -38,11 +38,6 @@ function getIdMovie($title, $pdo)
     return;
 }
 
-
-
-
-
-
 function inserMovies($movie, $pdo)//fonction ok
 {
     $req = $pdo->prepare('INSERT INTO `movies` (Title, Year, Length, Description, Poster) VALUE (?, ?, ?, ?, ?)');
@@ -214,4 +209,3 @@ function insert_studios_Movie($idStudios, $id_movie_db, $pdo)
     return;
 }
  ?>
-
