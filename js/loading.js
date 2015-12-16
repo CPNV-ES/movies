@@ -8,14 +8,36 @@
 	Background we set to 80% white with
    	our animation centered, and no-repeating */
 
-$body = $("body");
-
-$(document).on({
-	ajaxStart: function() { 
-		$body.addClass("loading");    
+/*
+$.post(
+*/
+ $.ajax({
+	 
+	url: 'scan_files.php ',
+	type: 'POST',
+	data: 
+	{
+		 fonction:'ma_fonction_php',
+		 params: 
+		{
+					param1: 'valeur1',
+					param2: 'valeur2'
+		},
 	},
 	
-	ajaxStop: function() { 
-		$body.removeClass("loading"); 
-	}    
-});
+	$body = $("body");
+	
+	$(document).on(
+	{
+		ajaxStart: function() 
+		{ 
+			$body.addClass("loading");    
+		},
+		
+		ajaxStop: function() 
+		{ 
+			$body.removeClass("loading"); 
+		}    
+	});
+	
+)};

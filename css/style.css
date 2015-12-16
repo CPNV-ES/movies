@@ -51,6 +51,22 @@ header{
   text-decoration: none;
   color: #E8E8E8;
 }
+.btn-more-infos{
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 14px;
+  background: #494848;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+  margin-top: 2%;
+}
+.btn-more-infos:hover {
+  text-decoration: none;
+  color: #E8E8E8;
+}
 .collapse navbar-collapse{
 	text-align: center !important;
 }
@@ -160,6 +176,12 @@ button.close {
 /* div for informations of movies */	
 .infos-text-block{
 	height: auto;
+}
+/* div description of movies */
+.infos-description-block{
+	Margin-top: 2%;
+	height: auto;
+	padding: 2%;
 }
 /* loading */	
 .modal{
