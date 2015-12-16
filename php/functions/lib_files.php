@@ -78,10 +78,13 @@ function listFile(&$result, $path){
 			}
 			continue;
 		}
-
-
 	}
-	return false;
+
+	if (empty($result)){
+		return false;
+	}
+
+	return true;
 }
 
 
