@@ -78,14 +78,14 @@ function listFile(&$result, $path){
 			}
 			continue;
 		}
-	
-		
+
+
 	}
 	return false;
 }
 
-	
-	
+
+
 	/* Function getFilms
 		Renvoie la totalité des films trouver si leur nom a été parse
 		Param :
@@ -99,24 +99,25 @@ function listFile(&$result, $path){
 			if(defined("PATHS")){
 				$paths = unserialize(PATHS);
 			}
-	
+
 			return false;
 		}
-	
+
 		foreach($paths as $path){
 			$path = str_replace('\\', '/', $path . '/'); //fucking windows
-	
+
 			$result = NULL;
 			if(!listFile($result, $path)){
 				$error .= "Erreur sur l'ouverture du répértoire ('$path')\n";
+				continue;
 			}
-	
-	
+
+
 			//base de donnée
 			if(($source_id = getSourceId($db, $path)) === false){
 				$source_id = insertSource($db, $path);
 			}
-	
+
 			$return = array();
 			foreach($result as $row)
 			{
@@ -124,24 +125,24 @@ function listFile(&$result, $path){
 					$error .= "Name is invalide " . $row[RESULT_NAME];
 					continue;
 				}
-	
+
 				//base de donnée
 				if(($file_type_id = getTypeId($db, $file_type)) === false){
 					//PARANOIA use default type id : 1
 					$file_type_id = 1;
 				}
-	
+
 				$row[RESULT_PATH_CLEAR] = str_replace($path, "", $row[RESULT_PATH]);
-	
+
 				if(empty($row[RESULT_PATH_CLEAR])){
 					$row[RESULT_PATH_CLEAR] = ".";
 				}
-	
+
 				//base de donnée
 				if(($file_id = getFile($db, $source_id, $row[RESULT_PATH_CLEAR], $row[RESULT_NAME], $file_type_id)) === false){
 					$file_id = insertFile($db, $source_id, $row[RESULT_PATH_CLEAR], $row[RESULT_NAME], $title, $file_type_id);
 				}
-	
+
 				if($title !== false){
 					// echo $error;
 					$return[] = array($file_id, $title);
@@ -151,7 +152,10 @@ function listFile(&$result, $path){
 				}
 			}
 		}
-	
-		//echo $error;
+
+		if (empty($return)){
+			return false;
+		}
+		
 		return true;
 	}
