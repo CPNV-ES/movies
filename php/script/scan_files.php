@@ -3,9 +3,11 @@
 	require_once(ROOT_PATH."php/configs/configs.php");
 	require_once(ROOT_PATH."php/functions/lib_files.php");
 	require_once(ROOT_PATH."php/functions/lib_movies.php");
+	//$paths = array("C:/Users/alain.pichonnat@cpnv.ch/Desktop/FILM");
 
-	$paths = array("C:/Users/alain.pichonnat@cpnv.ch/Desktop/FILM");
-	//$paths = array("$get quelque chose");
+	$paths = array();
+	//$paths[] = $_POST["path"];
+	//$paths[] = $_GET["path"];
 
 	$result = array();
 
