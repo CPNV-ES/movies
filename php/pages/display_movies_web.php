@@ -14,7 +14,7 @@
 				 		<b><?php echo $row['Title']; ?></b><br>
 				 		<?php echo 'Date de sortie: '.$row['Year'].''; ?><br>
 				 		<?php echo 'Durée: '.$row['Length'].' min'; ?><br>
-	            		<p><a href="more_informations.php?id=<?php echo $row["idMovies"];?>" class="btn">More informations</a></p>
+	            		<p><a href="more_informations.php?id=<?php echo $row["idMovies"];?>"><input type="button" class="btn-more-infos" value="More Informations"></a></p>
 				 	</div><!-- /.thumbnail -->
 				 </div><!-- /.portfolio-item -->
 			 </form>

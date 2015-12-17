@@ -85,17 +85,20 @@
 	    print_r($movies);
 	    echo "</pre>";
     */
-
-    echo '<div class="infos-block">';  
-    echo '<img src="'.$movies['Poster'].'">';     
-    echo '<div class="infos-text-block">';   
+	echo '<div class="infos-block">'; // global div
+	
+	echo '<div class="infos-poster-block">'; // div for the poster of the movie
+    echo '<img class="poster" src="'.$movies['Poster'].'">'; 
+   	echo '</div>';
+   
+    echo '<div class="infos-text-block">';  // div for the informations
 
     echo '<h2>'.$movies['Title'].'</h2><br>';
-    echo 'Date de sortie: '.$movies['Year'].'';
+    echo '<b>Date de sortie: </b>'.$movies['Year'].'';
     
     if($movies['genres'] !== false)
     {
-        echo '<br>Genres: ';
+        echo '<br><b>Genres:</b> ';
         foreach($movies['genres'] as $genres)
     	{			
             echo $genres['Name'].' / ';
@@ -103,12 +106,12 @@
     }
     else
     {
-        echo '<br>Genres: Aucun genres trouvés dans la base de données';
+        echo '<br><b>Genres:</b> Aucun genres trouvés dans la base de données';
     }
 
     if($movies['director'] !== false)
     {
-        echo '<br>Réalisateurs: ';
+        echo '<br><b>Réalisateurs: </b>';
         foreach($movies['director'] as $director)
         {           
             echo $director['FullName'].' / ';
@@ -116,12 +119,12 @@
     }
     else
     {
-        echo '<br>Réalisateurs: Aucun réalisateurs trouvés dans la base de données';
+        echo '<br><b>Réalisateurs:</b> Aucun réalisateurs trouvés dans la base de données';
     }
 
     if($movies['actor'] !== false)
     {
-        echo '<br>Acteurs principaux: ';
+        echo '<br><b>Acteurs principaux: </b>';
         foreach($movies['actor'] as $actor)
         {           
             echo $actor['FullName'].' / ';
@@ -129,12 +132,12 @@
     }
     else
     {
-        echo '<br>Acteurs principaux: Aucun acteurs trouvés dans la base de données';
+        echo '<br></b>Acteurs principaux:</b> Aucun acteurs trouvés dans la base de données';
     }
 
     if($movies['studios'] !== false)
     {
-        echo '<br>Studios de productions: ';
+        echo '<br><b>Studios de productions: </b>';
         foreach($movies['studios'] as $studios)
         {           
             echo $studios['Name'].' / ';
@@ -142,12 +145,12 @@
     }
     else
     {
-        echo '<br>Studios de productions: Aucun studios de productions trouvés dans la base de données';
+        echo '<br><b>Studios de productions:</b> Aucun studios de productions trouvés dans la base de données';
     }
 
     if($movies['countries'] !== false)
     {
-        echo '<br>Pays de productions: ';
+        echo '<br><b>Pays de productions: </b>';
         foreach($movies['countries'] as $countries)
         {           
             echo $countries['Name'].' / ';
@@ -155,12 +158,12 @@
     }
     else
     {
-        echo '<br>Pays de productions: Aucun pays de productions trouvés dans la base de données';
+        echo '<br><b>Pays de productions:</b> Aucun pays de productions trouvés dans la base de données';
     }
 
     if($movies['writer'] !== false)
     {
-        echo '<br>Scénaristes: ';
+        echo '<br><b>Scénaristes: </b>';
         foreach($movies['writer'] as $writer)
         {           
             echo $writer['FullName'].' / ';
@@ -168,12 +171,12 @@
     }
     else
     {
-        echo '<br>Scénaristes: Aucun scénaristes trouvés dans la base de données';
+        echo '<br><b>Scénaristes:</b> Aucun scénaristes trouvés dans la base de données';
     }
 
     if($movies['producer'] !== false)
     {
-        echo '<br>Producteurs: ';
+        echo '<br><b>Producteurs: </b> ';
         foreach($movies['producer'] as $producer)
         {           
             echo $producer['FullName'].' / ';
@@ -181,15 +184,16 @@
     }
     else
     {
-        echo '<br>Producteurs: Aucun producteurs trouvés dans la base de données';
+        echo '<br><b>Producteurs: </b> Aucun producteurs trouvés dans la base de données';
     }
-
-    echo '<br>Description: '.$movies['Description'].' min';
-
-    echo '</div>'; 
-    echo '</div>'; 
+	
+	echo '<div class="infos-description-block"';
+    echo '<br><h2>Description: </h2><br>'.$movies['Description'].' min';
+    echo '</div>';
+	
+	echo '</div>';
+?>
     
-?> 
 
 </body>
 

@@ -4,15 +4,13 @@
 	require_once(ROOT_PATH."php/functions/lib_files.php");
 	require_once(ROOT_PATH."php/functions/lib_movies.php");
 
-	$paths = array("C:/Users/alain.pichonnat@cpnv.ch/Desktop/FILM");
-	//$paths = array("$get quelque chose");
+	$paths = array();
+	$paths = array($_POST['path']);
 
 	$result = array();
-
 	if(getFilms($result, $paths) === false){
 		return false;
 	}
 
 	recoverInfoMovies($result);
-
 ?>
