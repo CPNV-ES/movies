@@ -250,7 +250,7 @@ function getInfoMovies($db, $attr = array(), $filter = array()){
 		}
 	}
 
-	$query .= "GROUP BY movies.`id`";
+	$query .= "GROUP BY movies.`idMovies`";
 
     $req = $db->prepare($query);
 

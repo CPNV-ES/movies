@@ -29,7 +29,7 @@
 ?>
             <div class="col-md-3 portfolio-item">
                 <div class="thumbnail">
-                    Pas de résultats
+                    <b>Pas de résultats</b>
                 </div>
             </div>
 
