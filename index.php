@@ -84,9 +84,10 @@
                         <form method="post" action="mapage.php3" enctype="multipart/form-data">
                         	<input type="hidden" name="max-file-size" value="300000"> <!-- limit the size of the file(s) to upload-->
                         	<input type="text"  id="mon-fichier" name="mon-fichier" placeholder="Browse" style="width:200px;">
+							<input type="button" id="loadfiles" value="Load the path"><!-- button to reload the page -->
 						</form>
                         <br>
-						<input type="button" id="loadfiles" class="btn" value="Load"><!-- button to reload the page -->
+
                         <input type="button" id="refresh" onClick="javascript:window.location.reload()" class="btn" value="Refresh"><!-- button to reload the page -->
 
                     </div><!-- /.popup-block -->

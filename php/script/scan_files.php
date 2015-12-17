@@ -31,9 +31,10 @@
 	}
 
 	$id_token = setToken($db, $paths[0], "Getting all files in source");
+	//echo $id_token;
 
 	$result = array();
-	if(getFilms($result, $path) === false){
+	if(getFilms($result, $paths) === false){
 		removeToken($db, $id_token);
 		return false;
 	}

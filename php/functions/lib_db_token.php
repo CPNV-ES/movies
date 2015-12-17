@@ -118,7 +118,7 @@ function updateToken($db, $id_token, $step){
 		- path : chemin source demandé
 	Return : En succes = l'id de la source, Echéc = False	*/
 function getStatus($db){
-	$query  = 'SELECT tokens.`step` FROM tokens ';
+	$query  = 'SELECT tokens.`Step` FROM tokens ';
 	$query .= 'LIMIT 1';
 
     $req = $db->prepare($query);
