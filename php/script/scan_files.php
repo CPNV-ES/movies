@@ -5,6 +5,8 @@
 	require_once(ROOT_PATH."php/configs/configs.php");
 	require_once(ROOT_PATH."php/functions/lib_files.php");
 	require_once(ROOT_PATH."php/functions/lib_movies.php");
+	//$paths = array("C:/Users/alain.pichonnat@cpnv.ch/Desktop/FILM");
+
 
 	if(!isset($_POST['path']) || empty($_POST['path'])){
 		$error = "Path for scanning is empty !";
@@ -32,6 +34,7 @@
 
 	$id_token = setToken($db, $paths[0], "Getting all files in source");
 	//echo $id_token;
+
 
 	$result = array();
 	if(getFilms($result, $paths) === false){
