@@ -11,67 +11,68 @@
       with htmlspecialchars().
     */
 
-    $attr = array(); //filtre sur la table movies
-    $filter = array();//filtre sur le reste
+    $attr = array(); //Filter in the table "movies"
+    $filter = array();//Filter in the tables like people, genres, ...
 
     /*
-      This condition checks if the value of the field's name of the inupt matches the valeurs in th database
+      This conditions check if the value of the field's name of the inupt matches the valeurs in th database
     */ 
 
     if(isset($_POST['namefilm']) && $_POST['namefilm'] != NULL)
     {
-      $namefilm = htmlspecialchars($_POST['namefilm']);
+      $namefilm = $_POST['namefilm'];
       $attr['Title'] = ['%'.$namefilm.'%', 'LIKE' ];
     }
 
     if(isset($_POST['year']) && $_POST['year'] != NULL)
     {
-      $year = htmlspecialchars($_POST['year']);
+      $year = $_POST['year'];
       $attr['Year'] = ["%".$year."%", 'LIKE' ];
     }
 
     if(isset($_POST['genre']) && $_POST['genre'] != NULL)
     {
-      $genre = htmlspecialchars($_POST['genre']);
+      $genre = $_POST['genre'];
       $filter['genres'] = $genre;
     }
 
     if(isset($_POST['namedirector']) && $_POST['namedirector'] != NULL)
     {
-      $namedirector = htmlspecialchars($_POST['namedirector']);
+      $namedirector = $_POST['namedirector'];
       $filter['director'] = '%'.$namedirector.'%';
     }
 
     if(isset($_POST['nameactor']) && $_POST['nameactor'] != NULL)
     {
-      $nameactor = htmlspecialchars($_POST['nameactor']);
+      $nameactor = $_POST['nameactor'];
       $filter['actor'] = '%'.$nameactor.'%';
     }
 
     if(isset($_POST['studio']) && $_POST['studio'] != NULL)
     {
-      $studio = htmlspecialchars($_POST['studio']);
+      $studio = $_POST['studio'];
       $filter['studios'] = $studio;
     }
 
     if(isset($_POST['country']) && $_POST['country'] != NULL)
     {
-      $country = htmlspecialchars($_POST['country']);
+      $country = $_POST['country'];
       $filter['countries'] = $country;
     }
 
     if(isset($_POST['writer']) && $_POST['writer'] != NULL)
     {
-      $writer = htmlspecialchars($_POST['writer']);
+      $writer = $_POST['writer'];
       $filter['writer'] = '%'.$writer.'%';
     }
 
     if(isset($_POST['producer']) && $_POST['producer'] != NULL)
     {
-      $producer = htmlspecialchars($_POST['producer']);
+      $producer = $_POST['producer'];
       $filter['producer'] = '%'.$producer.'%';
     }
 
+      /*  */
       $movies = getInfoMovies($connect, $attr, $filter);
 
       /*
@@ -86,27 +87,26 @@
     		foreach($movies as $row)
     		{
 ?>
-
 		<form action="<?php echo $_SERVER["PHP_SELF"];?>" method="get">
           <div class="col-md-3 portfolio-item">
             <div class="thumbnail">
               <b><?php echo ''.$row['Title'].''; ?></b><br>
-              <?php echo 'Année: '.$row['Year'].''; ?><br>
-              <?php echo 'Durée: '.$row['Length'].' min'; ?><br>
+              <?php echo 'Release date: '.$row['Year'].''; ?><br>
+              <?php echo 'Duration: '.$row['Length'].' min'; ?><br>
               <p><a href="more_informations.php?id=<?php echo $row["idMovies"];?>" class="btn"><input type="button" class="btn-more-infos" value="More Informations"></a></p>
             </div><!-- /.thumbnail -->
           </div><!-- /.portfolio-item -->
         </form>
-
 <?php
     		}
     	}
+      /* Display "No results" if the value entered in a field isn't in the database */
     	else
       {
 ?>
         <div class="col-md-3 portfolio-item">
             <div class="thumbnail">
-                <b>Pas de résultats</b>
+                <b>No results</b>
             </div><!-- /.thumbnail -->
         </div><!-- /.portfolio-item -->
 <?php
