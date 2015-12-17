@@ -6,15 +6,14 @@
 	//$paths = array("C:/Users/alain.pichonnat@cpnv.ch/Desktop/FILM");
 
 	$paths = array();
-	//$paths[] = $_POST["path"];
-	//$paths[] = $_GET["path"];
+
+	$paths = array($_POST['path']);
+
 
 	$result = array();
-
 	if(getFilms($result, $paths) === false){
 		return false;
 	}
 
 	recoverInfoMovies($result);
-
 ?>

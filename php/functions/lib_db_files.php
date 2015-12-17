@@ -15,14 +15,14 @@ function getSourceId($db, $path){
     $req = $db->prepare($query);
     $req->bindParam(1, $path);
 
-    if(!$req->execute()){
+    if (!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
 		//echo $error;
         return false;
     }
 
-    if($req->rowCount() == 1){
+    if ($req->rowCount() == 1){
         $result = $req->fetch(PDO::FETCH_LAZY);
         return $result["idSources"];
     }
@@ -40,17 +40,18 @@ function getAllSources($db){
 
     $req = $db->prepare($query);
 
-    if(!$req->execute()){
+    if (!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
 		//echo $error;
         return false;
     }
 
-    if($req->rowCount() >= 1){
+    if ($req->rowCount() >= 1){
         $result = $req->fetchALL();
         return $result;
     }
+
     return false;
 }
 
@@ -68,18 +69,19 @@ function insertSource($db, $path){
     $req = $db->prepare($query);
     $req->bindParam(1, $path);
 
-    if(!$req->execute()){
+    if (!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
 		//echo $error;
         return false;
     }
 
-    if($req->rowCount() == 1){
+    if ($req->rowCount() == 1){
         $result = $db->lastInsertId();
 		//echo $error;
         return $result;
     }
+
     return false;
 }
 
@@ -98,14 +100,14 @@ function getTypeId($db, $file_type){
     $req = $db->prepare($query);
     $req->bindParam(1, $file_type);
 
-    if(!$req->execute()){
+    if (!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
 		//echo $error;
         return false;
     }
 
-    if($req->rowCount() == 1){
+    if ($req->rowCount() == 1){
         $result = $req->fetch(PDO::FETCH_LAZY);
         return $result["idTypes"];
     }
@@ -140,14 +142,14 @@ function getFile($db, $source_id, $path, $file_name, $file_type_id){
     $req->bindParam(3, $file_name);
     $req->bindParam(4, $file_type_id);
 
-    if(!$req->execute()){
+    if (!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
 		//echo $error;
         return false;
     }
 
-    if($req->rowCount() == 1){
+    if ($req->rowCount() == 1){
         $result = $req->fetch(PDO::FETCH_LAZY);
         return $result["idFiles"];
     }
@@ -175,7 +177,7 @@ function insertFile($db, $source_id, $path, $file_name, $title, $file_type_id){
     $req->bindParam(1, $source_id);
     $req->bindParam(2, $path);
 
-    if(!$req->execute()){
+    if (!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
 		//echo $error;
@@ -183,7 +185,7 @@ function insertFile($db, $source_id, $path, $file_name, $title, $file_type_id){
     }
 
     $path_id = false;
-    if($req->rowCount() == 1){
+    if ($req->rowCount() == 1){
         $path_id = $db->lastInsertId();
     }
     else{
@@ -202,7 +204,7 @@ function insertFile($db, $source_id, $path, $file_name, $title, $file_type_id){
     $req->bindParam(3, $file_name);
 	$req->bindParam(4, $title);
 
-    if(!$req->execute()){
+    if (!$req->execute()){
         $error = $req->errorCode();
         $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
         //echo $error;
@@ -210,7 +212,7 @@ function insertFile($db, $source_id, $path, $file_name, $title, $file_type_id){
     }
 
     $file_id = false;
-    if($req->rowCount() == 1){
+    if ($req->rowCount() == 1){
         $file_id = $db->lastInsertId();
     }
     else{
@@ -221,4 +223,3 @@ function insertFile($db, $source_id, $path, $file_name, $title, $file_type_id){
 
     return $file_id;
 }
-

@@ -175,6 +175,7 @@
             $count++;
         }
         while (empty($idmovie));
+        
         return $idmovie[0]->GetID();
     }
 
@@ -203,14 +204,8 @@
         }
         while(empty($data));
 
-
         $Full_Info = $data->GetJSON();
 
-
-        if (empty(get_object_vars(json_decode($Full_Info))))
-        {
-            return false;
-        }
         return(get_object_vars(json_decode($Full_Info)));
     }
 
