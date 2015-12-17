@@ -26,7 +26,7 @@ function getMovies($db, $search_string = null){
 
     if (!$req->execute()){
         $error = $req->errorCode();
-        $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+        $error = "Error occurred during the execution of the request ('$error')";
 		//echo $error;
         return false;
     }
@@ -65,7 +65,7 @@ function getGenres($db, $id, $filter = false){
 
     if (!$req->execute()){
         $error = $req->errorCode();
-        $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+        $error = "Error occurred during the execution of the request ('$error')";
 		//echo $error;
         return false;
     }
@@ -104,7 +104,7 @@ function getCountries($db, $id, $filter = false){
 
     if (!$req->execute()){
         $error = $req->errorCode();
-        $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+        $error = "Error occurred during the execution of the request ('$error')";
 		//echo $error;
         return false;
     }
@@ -147,7 +147,7 @@ function getPeople($db, $id, $type, $filter = false){
 
     if (!$req->execute()){
         $error = $req->errorCode();
-        $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+        $error = "Error occurred during the execution of the request ('$error')";
 		//echo $error;
         return false;
     }
@@ -186,7 +186,7 @@ function getStudios($db, $id, $filter = false){
 
     if (!$req->execute()){
         $error = $req->errorCode();
-        $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+        $error = "Error occurred during the execution of the request ('$error')";
 		//echo $error;
         return false;
     }
@@ -256,7 +256,7 @@ function getInfoMovies($db, $attr = array(), $filter = array()){
 
     if (!$req->execute()){
         $error = $req->errorCode();
-        $error = "Erreur est survenu lors de l'execution de la requête ('$error')";
+        $error = "Error occurred during the execution of the request ('$error')";
 		//echo $error;
         return false;
     }
