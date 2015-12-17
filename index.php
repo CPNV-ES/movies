@@ -2,6 +2,7 @@
 	require_once("php/configs/project_root.php");
 	require_once(ROOT_PATH.'php/configs/configs.php');
     require_once(ROOT_PATH."php/functions/lib_db_connect.php");
+	require_once(ROOT_PATH."php/functions/lib_db_token.php");
 
     $connect= connectDB();//Connect the object "connectDB"
 ?>
@@ -91,6 +92,14 @@
                     </div><!-- /.popup-block -->
                 </div><!-- /.overplay -->
             	<p><a href="#overlay"><img id="option" class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
+                <p>
+                <?php
+                    if ( ($step = getStatus($connect)) != false){
+                        //$step['Step'] 
+                        echo '<img class="loading-gif" src="css/imgs/ajax-loader.gif"/>';
+                    }
+                ?>
+            	</p>
               </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>

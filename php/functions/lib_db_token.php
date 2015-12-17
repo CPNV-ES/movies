@@ -131,8 +131,8 @@ function getStatus($db){
     }
 
 	if ($req->rowCount() == 1){
-		$result = $req->fetchAll();
-        return $result;
+        $result = $req->fetch(PDO::FETCH_LAZY);
+        return $result['Step'];
     }
 
     return false;

@@ -201,7 +201,10 @@ button.close {
 .loading{
     overflow: hidden;   
 }
-
+.loading-gif{
+	margin-right: 2%;
+	float: right;
+}
 /* Anytime the body has the loading class, our
    modal element will be visible */
 .loading .modal{
@@ -211,3 +214,4 @@ button.close {
 form{
 	margin-bottom: 2%;
 	}
+	
