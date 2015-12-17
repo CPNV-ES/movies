@@ -35,7 +35,7 @@
             $id_movies_tmdb = Search_id_movie($data[FILES_TITLE], $tmdb);
 
             // if id movie is not found, next movie.
-            if ($id_movies_tmdb === false continue;
+            if ($id_movies_tmdb === false) continue;
 
             // research full info movie in TheMovieDB
             $Full_Info = Search_info_movie($id_movies_tmdb, $tmdb);

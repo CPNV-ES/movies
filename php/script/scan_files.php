@@ -5,8 +5,6 @@
 	require_once(ROOT_PATH."php/configs/configs.php");
 	require_once(ROOT_PATH."php/functions/lib_files.php");
 	require_once(ROOT_PATH."php/functions/lib_movies.php");
-	//$paths = array("C:/Users/alain.pichonnat@cpnv.ch/Desktop/FILM");
-
 
 	if(!isset($_POST['path']) || empty($_POST['path'])){
 		$error = "Path for scanning is empty !";
