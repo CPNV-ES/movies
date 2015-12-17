@@ -4,7 +4,6 @@
     require_once(ROOT_PATH."php/functions/lib_db_connect.php");
 
     $connect= connectDB();//Connect the object "connectDB"
-
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +23,6 @@
     <title>Movies</title>
 
     <!-- Bootstrap Core CSS -->
-
     <link href="css/bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
@@ -84,9 +82,10 @@
                         <form method="post" action="mapage.php3" enctype="multipart/form-data">
                         	<input type="hidden" name="max-file-size" value="300000"> <!-- limit the size of the file(s) to upload-->
                         	<input type="text"  id="mon-fichier" name="mon-fichier" placeholder="Browse" style="width:200px;">
+							<input type="button" id="loadfiles" class="btn-more-infos" value="Load the path"><!-- button to reload the page -->
 						</form>
                         <br>
-						<input type="button" id="loadfiles" class="btn" value="Load"><!-- button to reload the page -->
+
                         <input type="button" id="refresh" onClick="javascript:window.location.reload()" class="btn" value="Refresh"><!-- button to reload the page -->
 
                     </div><!-- /.popup-block -->

@@ -4,7 +4,6 @@
 	require_once(ROOT_PATH."php/functions/lib_db_connect.php");
 
     $connect= connectDB();//Connect the object "connectDB"
-
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +24,6 @@
     <title>Movies</title>
 
     <!-- Bootstrap Core CSS -->
-
     <link href="css/bootstrap.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
@@ -86,6 +84,7 @@
     <!-- Page Content -->
     <div class="container">
 
+        <!-- Field search -->
         <div class="search">
             <form action="webmovies.php" method="post">
                 <input type="hidden" name="send">
@@ -97,7 +96,7 @@
                 <input type="text" name="studio" size="15" placeholder="Studio">
                 <input type="text" name="country" size="15" placeholder="Country">
                 <input type="text" name="writer" size="15" placeholder="Name of writer">
-                <input type="text" name="producer" size="15" placeholder="name of producer">
+                <input type="text" name="producer" size="15" placeholder="Name of producer">
                 <input type="submit" value="Search">
             </form>
         </div><!-- /.search -->
@@ -155,7 +154,6 @@
     <div class="modal"><!-- Place at bottom of page --></div>
     
     <script src="js/clear.js"></script><!-- Clear the display of the search -->
-
 
 </body>
 
