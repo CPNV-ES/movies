@@ -1,4 +1,3 @@
 <?php
 
-	define('ROOT_PATH', 'C:/wamp/www/movies/');
-
+	define('ROOT_PATH', 'Z:/web/'); //Default path for standalone application
