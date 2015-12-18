@@ -71,12 +71,6 @@
                         <a class="menu" href="webmovies.php">Web movies</a>
                     </li>
                 </ul>
-                <!--
-                <div id="overlay"><a href="#nowehere">Exit</a></div>
-                <a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                 do a opening window for the options
-                    <a href="php/pages/options.php" onclick="window.open('','popup','width=auto, height=200, top=auto, left=auto, toolbar=0, location=0, directories=0, status=0, menubar=0, scrollbars=0, resizable=1')" target="popup"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                -->
               </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
@@ -86,9 +80,10 @@
 
         <!-- Field search -->
         <div class="search">
-            <form action="webmovies.php" method="post">
+            <form class="webmovies-filters" action="webmovies.php" method="post">
                 <input type="hidden" name="send">
-                <input type="text" name="namefilm" size="30" placeholder="Name of film"><br><br>
+                <input type="text" name="namefilm" size="30" placeholder="Name of movie">
+                <input type="submit" value="Search"><br><br>
                 <input type="year" name="year" size="4" placeholder="Year">
                 <input type="text" name="genre" size="15" placeholder="Genre">
                 <input type="text" name="namedirector" size="15" placeholder="Name of director">
@@ -97,7 +92,6 @@
                 <input type="text" name="country" size="15" placeholder="Country">
                 <input type="text" name="writer" size="15" placeholder="Name of writer">
                 <input type="text" name="producer" size="15" placeholder="Name of producer">
-                <input type="submit" value="Search">
             </form>
         </div><!-- /.search -->
 

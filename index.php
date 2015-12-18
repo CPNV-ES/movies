@@ -2,6 +2,7 @@
 	require_once("php/configs/project_root.php");
 	require_once(ROOT_PATH.'php/configs/configs.php');
     require_once(ROOT_PATH."php/functions/lib_db_connect.php");
+	require_once(ROOT_PATH."php/functions/lib_db_token.php");
 
     $connect= connectDB();//Connect the object "connectDB"
 ?>
@@ -76,20 +77,29 @@
 
                         <h2>Options</h2>
 
-                        <p>Choose your options and give the link file of your movies.</p><br>
+                        <p>Copy and paste your path of your movies right bellow in the <b>"Browse"</b> boxe and click on <b>"Load the link"</b> to charge it.</p><br>
 
                         <!-- button to uplod the files on the computer -->
                         <form method="post" action="mapage.php3" enctype="multipart/form-data">
                         	<input type="hidden" name="max-file-size" value="300000"> <!-- limit the size of the file(s) to upload-->
                         	<input type="text"  id="mon-fichier" name="mon-fichier" placeholder="Browse" style="width:200px;">
+							<input type="button" id="loadfiles" class="btn-more-infos" value="Load the path"><!-- button to reload the page -->
 						</form>
                         <br>
-                        <input type="button" id="loadfiles" class="btn" value="Load the link"><!-- button to reload the page -->
-                        <input type="button" id="refresh" onClick="javascript:window.location.reload()" class="btn" value="Refresh the page"><!-- button to refresh the page -->
 
+                        <input type="button" id="refresh" onClick="javascript:window.location.reload()" class="btn" value="Refresh the page"><!-- button to refresh the page -->
+                    
                     </div><!-- /.popup-block -->
                 </div><!-- /.overplay -->
             	<p><a href="#overlay"><img id="option" class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
+                <p>
+                <?php
+                    if ( ($step = getStatus($connect)) != false){
+                        //$step['Step'] 
+                        echo '<img class="loading-gif" src="css/imgs/ajax-loader.gif"/>';
+                    }
+                ?>
+            	</p>
               </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
@@ -99,7 +109,7 @@
 
         <div class="search">
             <form action="index.php" method="post">
-                <input type="text" name="requete" size="30" placeholder="Name of film">
+                <input type="text" name="requete" size="30" placeholder="Name of movie">
                 <input type="submit" value="Search">
             </form>
         </div><!-- /.search -->

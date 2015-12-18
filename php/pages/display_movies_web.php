@@ -35,4 +35,5 @@
 			</div><!-- /.thumbnail -->
 		</div><!-- /.portfolio-item -->  
 <?php
+
 	}

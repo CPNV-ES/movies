@@ -35,7 +35,6 @@
                     <b>No results</b>
                 </div><!-- /.thumbnail -->
             </div><!-- /.portfolio-item --> 
-
 <?php
 		}
 	}
