@@ -82,20 +82,14 @@
                         <form method="post" action="mapage.php3" enctype="multipart/form-data">
                         	<input type="hidden" name="max-file-size" value="300000"> <!-- limit the size of the file(s) to upload-->
                         	<input type="text"  id="mon-fichier" name="mon-fichier" placeholder="Browse" style="width:200px;">
-                            <input type="button" id="loadfiles" class="btn-more-infos" value="Load the link"><!-- button to reload the page -->
 						</form>
                         <br>
+                        <input type="button" id="loadfiles" class="btn" value="Load the link"><!-- button to reload the page -->
                         <input type="button" id="refresh" onClick="javascript:window.location.reload()" class="btn" value="Refresh the page"><!-- button to refresh the page -->
 
                     </div><!-- /.popup-block -->
                 </div><!-- /.overplay -->
             	<p><a href="#overlay"><img id="option" class="img-options" src="css/imgs/btn_settings-small.png"></a></p>
-                <!--
-            	<div id="overlay"><a href="#nowehere">Exit</a></div>
-                <a href="#overlay"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                 do a opening window for the options
-                	<a href="php/pages/options.php" onclick="window.open('','popup','width=auto, height=200, top=auto, left=auto, toolbar=0, location=0, directories=0, status=0, menubar=0, scrollbars=0, resizable=1')" target="popup"><img class="img-options" src="css/imgs/btn_settings-small.png"></a>
-                -->
               </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav>
