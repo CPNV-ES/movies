@@ -21,6 +21,6 @@
     define("FILES_TITLE", 1);
 
 	//Conctant for connect tmdb
-	define("KEY_TMDB", "3258bf1b52c98a7b40e373ad5a43521e");
+	define("KEY_TMDB", "insert your key");
 	define("LANG_TMDB", "fr");
  ?>
