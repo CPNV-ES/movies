@@ -13,7 +13,8 @@ require_once(ROOT_PATH."php/functions/lib_db_connect.php");
 	Return : En succes = True, Echéc = False	*/
 function getInfoOfFilm($name, &$title, &$type){
 	$matches = array();
-
+	
+	//Improved regex todo implement : /^(?:\[.*\])?[_\.\s]?(?P<title>(?:[a-zA-Z0-9éèàô&]{1,})(?:[_\.\s](?:[A-Z]?(?:[a-zéèàô&]{1,}|[I]{1,})?|(?!(?:19|20|21)[0-9]{2})[0-9]{1,}|\%\![0-9]{1,}))*)(?:[_\.\s](?:(?:\(?(?:[0-9]){4}\)?|[A-Z]{4,}|(?:(?:[sSeE](?:aison|eason|pisode)?)[_\s]?(?P<saison>[0-9]{1,}))[\s-]*(?:(?:[sSeE](?:aison|eason|pisode)?)[_\s]?(?P<episode>[0-9]{1,}))?).*))?\.(?P<extension>avi|mp4|mov|mpg|mpa|wma|wmv)$/
 	preg_match('/^(\[.*\])?[_\.\s]?(([a-zA-Z0-9éèàô&]{1,})([_\.\s]([A-Z]?([a-zéèàô&]{1,}|[I]{1,})?|(?!(19|20|21)[0-9]{2})[0-9]{1,}|\%\![0-9]{1,}))*)([_\.\s]((\(?([0-9]){4}\)?|[A-Z]{4,}|(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})[\s-]*(([sSeE](aison|eason|pisode)?)[_\s]?[0-9]{1,})?).*))?\.(avi|mp4|mov|mpg|mpa|wma|wmv)$/', $name, $matches);
 
 	if (isset($matches[2])){
